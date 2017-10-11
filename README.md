@@ -1,0 +1,2 @@
+# negar
+Negar Child Theme
