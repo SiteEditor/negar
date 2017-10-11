@@ -1,2 +1,2 @@
-# negar
-Negar Child Theme
+# tanin
+Tanin Project
