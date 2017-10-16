@@ -1178,33 +1178,6 @@ body .product-cat-justified .tg-cats-holder {
 }
 
 
-
-
-
-
-/*--------------------------------------------------------------
-6.0 Forms
---------------------------------------------------------------*/
-
-.contactForm {
-    color: #999;
-    font-size: 14px;
-}
-
-.contactForm p:empty {
-    display: none;
-}
-
-.contactForm .form-control {
-    margin-bottom: 8px;
-    background-color: #fbfbfb;
-}
-
-.contactForm .form-control:focus {
-    background-color: #fbfbfb;
-}
-
-
 /****************************/
 
 
@@ -1258,7 +1231,7 @@ body .product-cat-justified .tg-cats-holder {
 
     body .navigation-wrapper .navbar-wrap #menu-tanin > li > a:after {
         content: ".";
-        margin-left: 30px;
+        margin-left: 15px;
     }
 
     body .navigation-wrapper .navbar-wrap #menu-tanin > li:last-child > a:after {
@@ -1270,14 +1243,14 @@ body .product-cat-justified .tg-cats-holder {
 /*****************/
 
 body .navigation-wrapper.woocommerce-mini-cart-wrapper .navbar-wrap ul li .cart-contents {
-    background-image: url(images/cart.png);
-    background-size: 32px;
-    background-position: center top;
-    background-repeat: no-repeat;
-    width: 32px;
-    height: 42px;
-    display: block;
-    padding: 0 0 10px;
+  background-image: url(images/cart.png);
+  background-size: 29px;
+  background-position: center top;
+  background-repeat: no-repeat;
+  width: 29px;
+  height: 29px;
+  display: block;
+  margin: 0 auto !important;
 }
 
 body .navigation-wrapper.woocommerce-mini-cart-wrapper .navbar-wrap ul li .cart-contents .cart-contents-count {
@@ -1544,7 +1517,7 @@ body .in-btn-back-module #return-to-top i:hover {
 
 .general-separator-sm {
     background: url(images/g-s-sm.png) no-repeat center center;
-    height: 10px;
+    height: 11px;
 }
 
 
@@ -3559,4 +3532,153 @@ body .mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand .mCSB_draggerCont
     font-family: FontAwesome;
     font-size: 15px;
     height: 0.5em;
+}
+
+
+/** Negar header **/
+
+.row.negar-header-group-icons {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.negar-header-group-icons .col-md-4,
+.negar-header-group-icons .col-xs-4
+{
+  padding-left: 2px;
+  padding-right: 2px;
+  text-align: center;
+}
+
+.negar-header-group-icons .negar-header-icon.wishlist {
+  display: block;
+  width: 100%;
+  height: 29px;
+}
+
+.negar-header-group-icons .negar-header-icon.wishlist > a{
+  background-image: url(images/heart.png);
+}
+
+.negar-header-group-icons .negar-header-icon.wishlist > a:hover,
+.negar-header-group-icons .negar-header-icon.wishlist > a:active,
+.negar-header-group-icons .negar-header-icon.wishlist > a:focus{
+  background-image: url(images/heart-active.png);
+}
+
+.negar-header-group-icons .negar-header-icon.user {
+
+  display: block;
+  width: 100%;
+  height: 29px;
+}
+
+.negar-header-group-icons .negar-header-icon.user > a{
+  background-image: url(images/user.png);
+}
+
+.negar-header-group-icons .negar-header-icon.user > a:hover,
+.negar-header-group-icons .negar-header-icon.user > a:active,
+.negar-header-group-icons .negar-header-icon.user > a:focus{
+  background-image: url(images/user-active.png);
+}
+
+body .navigation-wrapper.woocommerce-mini-cart-wrapper .navbar-wrap ul li .cart-contents:hover,
+body .navigation-wrapper.woocommerce-mini-cart-wrapper .navbar-wrap ul li .cart-contents:active,
+body .navigation-wrapper.woocommerce-mini-cart-wrapper .navbar-wrap ul li .cart-contents:focus {
+  background-image: url(images/cart-active.png);
+}
+
+select.woocommerce-currency-switcher {
+  height: 30px;
+  border: 1px solid #b7b7b7;
+}
+
+.navigation-wrapper .navbar-wrap ul li a{
+  margin: 0 15px 0 0 !important;
+}
+
+.negar-header-group-icons .negar-header-icon > a {
+  display: block;
+  text-indent: -9999px;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/** Negar Footer **/
+
+.negar-customer-service-form textarea.form-control.message {
+  max-height: 45px;
+}
+
+.negar-customer-service-form select.form-control.subject {
+  max-height: 30px;
+  width: 100%;
+}
+
+.negar-customer-service-form select.form-control.subject {
+  color: #999999;
+}
+
+.negar-customer-service-form .send-form-container{
+  text-align: right;
+}
+
+.negar-customer-service-form .send-form{
+  margin-right: -20px;
+}
+
+.negar-customer-service-form .send-form {
+  margin-right: -20px;
+  background-color: transparent;
+  color: #1c39bb !important;
+  font-size: 20px;
+  padding: 10px 0;
+  text-decoration: underline;
+}
+
+.negar-customer-service-form .send-form:hover,
+.negar-customer-service-form .send-form:active,
+.negar-customer-service-form .send-form:focus{
+  background-color: transparent;
+  color: #000 !important;
+}
+
+.negar-footer-middle-column{
+
+}
+
+#footer-columns-sp > td.sed-column-pb:nth-of-type(2) {
+  background-color: #dfe0e2 !important;
+  /*border-left: 3px solid #55d861;*/
+}
+
+/*--------------------------------------------------------------
+6.0 Forms
+--------------------------------------------------------------*/
+
+.contactForm {
+  color: #999;
+  font-size: 14px;
+}
+
+.contactForm p:empty {
+  display: none;
+}
+
+.contactForm .form-control {
+  margin-bottom: 8px;
+  /*background-color: #fbfbfb;*/
+}
+
+.contactForm .form-control:focus {
+  background-color: transparent;
+}
+
+.tp-leftarrow.default,
+.tp-rightarrow.default{
+  width:20px;
+  height:48px;
 }

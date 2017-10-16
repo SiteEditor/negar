@@ -271,7 +271,9 @@ class SedShopWoocommerceArchiveModule{
 
         //add_filter( 'sed_shop_before_shop_loop'         , 'woocommerce_pagination' , 10  );
 
-        remove_filter('woocommerce_get_price_html', array( YITH_WC_Subscription() , 'change_price_html' ), 10 );
+        if( function_exists( 'YITH_WC_Subscription' ) ) {
+            remove_filter('woocommerce_get_price_html', array(YITH_WC_Subscription(), 'change_price_html'), 10);
+        }
 
         add_filter('woocommerce_get_price_html', array( $this , 'change_price_subscription' ), 10 , 2 );
 
@@ -281,7 +283,7 @@ class SedShopWoocommerceArchiveModule{
 
     public function change_price_subscription( $price, $product ){
 
-        if ( ! YITH_WC_Subscription()->is_subscription( $product->get_id() ) ) {
+        if ( function_exists( 'YITH_WC_Subscription' ) && ! YITH_WC_Subscription()->is_subscription( $product->get_id() ) ) {
             return $price;
         }
 

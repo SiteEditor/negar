@@ -274,6 +274,41 @@ function tanin_check_exist_parent_term( $term , $list ){
 
 }
 
+
+add_shortcode( 'negar_header_group_icon', 'negar_add_header_group_icon' );
+
+function negar_add_header_group_icon( $atts = null ){
+
+    ob_start();
+
+   ?>
+    <div class="row negar-header-group-icons">
+
+        <div class="col-xs-4">
+            <div class="negar-header-icon user">
+                <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"><?php echo __("My Account" , "negar");?></a>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="negar-header-icon ncart">
+               <?php echo do_shortcode( '[sed_woo_cart_icon]' );?>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="negar-header-icon wishlist">
+                <a href="<?php echo esc_url( YITH_WCWL()->get_wishlist_url() ); ?>"><?php echo __("Wishlist" , "negar");?></a>
+            </div>
+        </div>
+
+    </div>
+    <?php
+
+    return ob_get_clean();
+
+}
+
 /**
  * Site Editor Shop WooCommerce
  */
