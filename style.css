@@ -3829,5 +3829,14 @@ Shop & Product
 *********/
 
 .negar-product-archive-thumbnail{
-    position: relative;
+  position: relative;
+}
+
+.sed-negar-content-scrolling{
+  min-height: 300px;
+}
+
+.negar-breadcrumb-on-banner #tanin-breadcrumb .breadcrumbs > span > a {
+  color: #000000;
+  text-transform: uppercase;
 }

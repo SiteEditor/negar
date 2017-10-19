@@ -57,7 +57,7 @@
          * Vertical Menu Accordion
          */
 
-        var scrollbarContainer =  $(".sed-shop-faq-wrapper"),
+        var scrollbarContainer =  $(".sed-shop-faq-wrapper,.sed-negar-content-scrolling,.sed-shop-faq-single"),
             scrollbarHeight =  $( window ).height() - 200;
 
         scrollbarContainer.css({
@@ -66,25 +66,6 @@
 
 
         scrollbarContainer.mCustomScrollbar({
-            autoHideScrollbar:true ,
-            advanced:{
-                updateOnBrowserResize:true, /*update scrollbars on browser resize (for layouts based on percentages): boolean*/
-                updateOnContentResize:true,
-            },
-            scrollButtons:{
-                enable:false
-            },
-        });
-
-        var scrollbarContainer_2 =  $(".sed-shop-faq-single"),
-            scrollbarHeight_2 =  $( window ).height() - 200;
-
-        scrollbarContainer_2.css({
-            height : scrollbarHeight_2 + 'px',
-        });
-
-
-        scrollbarContainer_2.mCustomScrollbar({
             autoHideScrollbar:true ,
             advanced:{
                 updateOnBrowserResize:true, /*update scrollbars on browser resize (for layouts based on percentages): boolean*/
