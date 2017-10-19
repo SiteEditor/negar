@@ -32,7 +32,6 @@
 
 
 -->
-
 	<div class="sliders-img">
 
         <div class="row">
@@ -78,8 +77,8 @@
 
                         <div class="content-container">
                             <div class="punchline">
-                                <div class="title"><h3>محصولات...</h3></div>
-                                <p class="desc">لورم ایپسوم یا طرح‌نما به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد. </p>
+                                <div class="title"><h3>Ultricies</h3></div>
+                                <p class="desc">Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim donec pede justo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim donec pede justo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim donec pede justo.</p>
                             </div>
                         </div>
 
@@ -132,8 +131,82 @@
     </div>
 
 
+<!--============================================-->
 
 
+
+	<div class="sliders-img">
+
+        <div class="row">
+
+        	<div class="col-sm-7 margin-top-box-2">
+
+                <div class="row">
+
+                	<div class="col-sm-10">
+
+                        <div class="content-container">
+                            <div class="punchline">
+                                <div class="title"><h3>Ultricies</h3></div>
+                                <p class="desc">Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim donec pede justo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
+                            </div>
+                        </div>
+
+		            </div>
+
+                    <div class="col-sm-12">&nbsp;</div>
+                    <div class="col-sm-12">&nbsp;</div>
+                    <div class="col-sm-12">&nbsp;</div>
+                    <div class="col-sm-12">&nbsp;</div>
+
+                	<div class="col-sm-12">
+
+			            <div class="slide-container slide-first">
+
+		                    <div class="slide-item">
+		                        <img src="http://localhost/mafir/wp-content/uploads/2017/07/2-1-640x640.jpg">  
+		                    </div>
+			            	
+			            </div>
+
+			    	</div>
+
+	            </div>
+
+            </div>  
+
+            <div class="col-sm-5">&nbsp;</div>
+          
+        	<div class="col-sm-7">
+
+                <div class="text-right">
+                    <div class="arrows-box mafiran-next-prev-controler">
+                        <span class="arrow previous"><i class="fa fa-angle-left"></i></span>
+                        <span class="arrow next"><i class="fa fa-angle-right"></i></span>
+                    </div>
+                </div>
+              
+            </div>
+          
+        	<div class="col-sm-5 margin-top-box-2">
+
+                <div class="text-left">
+
+	                <div class="slide-container slide-second sed-mafiran-slider">
+
+	                    <div class="slide-item"> 
+	                        <img src="http://localhost/mafir/wp-content/uploads/2017/07/2-1-640x640.jpg"> 
+	                    </div>
+
+	                </div>
+
+                </div>
+              
+            </div>
+
+        </div>
+
+    </div>
 
 
 

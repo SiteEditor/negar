@@ -3725,6 +3725,10 @@ select.woocommerce-currency-switcher {
         margin-top: -100px; 
     }
 
+    .sliders-img .margin-top-box-2 {
+        margin-top: -160px; 
+    }
+
     .sliders-img .margin-left-box {
     	margin-left: -8.33333333%;
     } 
@@ -3751,13 +3755,13 @@ select.woocommerce-currency-switcher {
     vertical-align: top;
     margin: 0;
     background-color: #00a594;
-    padding: 88px 0;
+    padding: 78px 0;
     text-align: center;
 }
 
 .sliders-img .arrows-box .arrow {
-    width: 20px;
-    height: 48px;    
+    width: 28px;
+    height: 66px;
     margin: 0 25px;
     display: inline-block;
     background-size: 100% auto;
@@ -3781,8 +3785,23 @@ select.woocommerce-currency-switcher {
     background-image: url(images/large_right3.png);
 }
 
+.sliders-img .arrows-box.arrows-box-2 {
+    background-image: url(images/nav-bg.jpg);
+    background-size: 100% auto;
+    background-repeat: repeat-x;
+    background-position: center top;
+}
+
+.sliders-img .arrows-box.arrows-box-2 .arrow.previous {
+    background-image: url(images/large_left_active.png);
+}
+
+.sliders-img .arrows-box.arrows-box-2 .arrow.next { 
+    background-image: url(images/large_right_active.png);
+}
+
 .sliders-img .arrows-box .arrow:hover {
-	opacity: 0.85;
+	opacity: 0.8;
 }
 
 @media (max-width: 768px) {
