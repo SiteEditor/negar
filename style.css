@@ -2277,9 +2277,10 @@ ul.products li.product .button:hover {
 
 /***********************/
 
-.woocommerce.single-product .quantity {
+/* Parsaatef */
+/*.woocommerce.single-product .quantity {
     display: none !important;
-}
+}*/
 
 .woocommerce.single-product .product-heading-wrap {
     border: 1px solid #ddd;
@@ -3681,4 +3682,11 @@ select.woocommerce-currency-switcher {
 .tp-rightarrow.default{
   width:20px;
   height:48px;
+}
+
+/**
+Shop & Product
+*********/
+.negar-product-archive-thumbnail{
+  position: relative;
 }

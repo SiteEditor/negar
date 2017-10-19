@@ -100,7 +100,7 @@ $states      = WC()->countries->get_states( $current_cc );
 
 					<ul>
 
-						<li> <span class="info-label"><?php _e( "Subscription:" , "sed-shop" );?></span> <span class="info-value"><?php if( tanin_is_user_subscription() ) echo esc_html__( "Yes" , "tanin" ); else echo esc_html__( "No" , "tanin" );?></span> </li>
+						<li> <span class="info-label"><?php _e( "Subscription:" , "sed-shop" );?></span> <span class="info-value"><?php //if( tanin_is_user_subscription() ) echo esc_html__( "Yes" , "tanin" ); else echo esc_html__( "No" , "tanin" );?></span> </li>
 
 						<li> <span class="info-label"><?php _e( "Birthday:" , "sed-shop" );?></span> <span class="info-value"><?php echo esc_html( $birthday );?></span> </li>
 

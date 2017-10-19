@@ -132,59 +132,41 @@
          * Single Products
          */
 
-        $(".single_open_add_to_cart_dialog").on("click" , function(){
+        $(".flex-control-nav.flex-control-thumbs").livequery(function(){
 
-            var $dialog = $("#sed-add-to-cart-dialog");
-
-            $dialog.addClass( 'active' );
-
-            var $conetntForm = $(".add-to-cart-dialog-form-conetnt");
-
-            if( $conetntForm.length > 0 ) {
-
-                var $fields = $(".product-options .product-option-value"),
-                    fields = $fields.serializeArray()
-                    $labels = $(".product-options .product-option-label"),
-                    $html = '';
-
-                console.log(fields);
-
-                $.each(fields, function (index, val) {
-
-                    var currField = $fields.eq( index ),
-                        tagName = currField.prop("tagName"),
-                        $value = val.value;
-
-                    if( tagName.toLowerCase() == "select" ){
-
-                        $value = currField.find("option:selected").text();
-
-                    }
-
-                    $html += '<div class="tanin-form-item-content"><span class="input-label">' + $labels.eq( index ).text() + ': </span><span class="input-val">' + $value + '</span></div>';
-
-                });
-
-                $conetntForm.html( $html );
-
-                var quantity = $("#tanin_product_quantity").find(".product-option-value").val();
-
-                $("form.tanin-main-form-cart").find(".quantity > input.qty").val( quantity );
-
-            }
+            $(this).slick({
+                mobileFirst 		: true ,
+                arrows				: true,
+                slidesToShow		: 3,
+                slidesToScroll		: 1,
+                dots				: false,
+                centerMode			: false,
+                rtl 				: $rtl,
+                swipe      			: true ,
+                touchMove  			: true ,
+                infinite			: false,
+                prevArrow : '<span class="slide-nav-bt slide-prev custom-btn custom-btn-secondary"><i class="fa fa-angle-left"></i></span>',
+                nextArrow : '<span class="slide-nav-bt slide-next custom-btn custom-btn-secondary"><i class="fa fa-angle-right"></i></span>',
+            });
 
         });
 
-        $(".add-to-cart-dialog-close").on("click" , function(){
-            $("#sed-add-to-cart-dialog").removeClass( 'active' );
-        });
+        $(".related.products > ul.products").livequery(function(){
 
-        $("#sed-add-to-cart-dialog").on('click', function (e) {
-
-            if ( !$(e.target).hasClass("add-to-cart-dialog-inner") && $(e.target).parents(".add-to-cart-dialog-inner:first").length == 0 ) {
-
-                $(this).removeClass( 'active' );
-            }
+            $(this).slick({
+                mobileFirst 		: true ,
+                arrows				: true,
+                slidesToShow		: 4,
+                slidesToScroll		: 1,
+                dots				: false,
+                centerMode			: false,
+                rtl 				: $rtl,
+                swipe      			: true ,
+                touchMove  			: true ,
+                infinite			: false,
+                prevArrow : '<span class="slide-nav-bt slide-prev custom-btn custom-btn-secondary"><i class="fa fa-angle-left"></i></span>',
+                nextArrow : '<span class="slide-nav-bt slide-next custom-btn custom-btn-secondary"><i class="fa fa-angle-right"></i></span>',
+            });
 
         });
 

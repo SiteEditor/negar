@@ -83,6 +83,26 @@ class SedShopWoocommerceSingleProductModule{
 
         add_filter( "woocommerce_get_price_html" , array( __CLASS__ , "get_price_html" ) , 100 , 2 );
 
+        add_filter( "woocommerce_product_single_add_to_cart_text" , array( __CLASS__ , "add_to_cart_text" ) , 100 , 1 );
+
+        add_filter( "woocommerce_output_related_products_args" , array( __CLASS__ , "related_products_args" ) , 100 , 1 );
+
+    }
+
+    public static function related_products_args( $args ){
+
+        $args['posts_per_page'] = 12;
+
+        return $args;
+
+    }
+
+    public static function add_to_cart_text( $text ){
+
+        $text = __( 'Add to bag', 'woocommerce' );
+
+        return $text;
+
     }
 
     /**
@@ -108,9 +128,27 @@ class SedShopWoocommerceSingleProductModule{
 
         add_action( 'woocommerce_single_product_summary', array( __CLASS__ , 'end_heading' ), 11 );
 
-        //add_action( 'sed_shop_single_product_heading_left', 'woocommerce_template_single_title', 5 );
+        add_action( 'woocommerce_single_product_summary', array( __CLASS__ , 'add_wishlist' ), 10 );
 
         //add_action( 'sed_shop_single_product_heading_right', 'woocommerce_template_single_rating', 10 );
+
+    }
+
+    public static function product_content(){
+
+        global $post;
+
+        if ( $post->post_content ) {
+
+            woocommerce_product_description_tab(  );
+
+        }
+
+    }
+
+    public static function add_wishlist(  ){
+
+        echo do_shortcode( '[yith_wcwl_add_to_wishlist icon="fa fa-heart"]' );
 
     }
 
@@ -201,7 +239,7 @@ class SedShopWoocommerceSingleProductModule{
 
             $discount .= '<div class="product-discount-price">';
 
-            $discount .= round( ( ($from - $to)/$from ) * 100 ) . "%" ;
+            $discount .= round( ( ($from - $to)/$from ) * 100 ) . "% OFF" ;
 
             $discount .= '</div>';
 
@@ -225,18 +263,21 @@ class SedShopWoocommerceSingleProductModule{
 
     }
 
-
     public static function get_thumbnails_columns( $columns ){
 
-        return 3;
+        return 4;
 
     }
 
     public function remove_details_products(){
 
-        remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+        //remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+        remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
 
         remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+
+        add_action( 'woocommerce_after_single_product_summary', array( __CLASS__ , 'product_content' ), 10 );
 
     }
 
@@ -271,47 +312,10 @@ class SedShopWoocommerceArchiveModule{
 
         //add_filter( 'sed_shop_before_shop_loop'         , 'woocommerce_pagination' , 10  );
 
-        if( function_exists( 'YITH_WC_Subscription' ) ) {
-            remove_filter('woocommerce_get_price_html', array(YITH_WC_Subscription(), 'change_price_html'), 10);
-        }
-
-        add_filter('woocommerce_get_price_html', array( $this , 'change_price_subscription' ), 10 , 2 );
-
         $this->set_content_product();
 
     }
 
-    public function change_price_subscription( $price, $product ){
-
-        if ( function_exists( 'YITH_WC_Subscription' ) && ! YITH_WC_Subscription()->is_subscription( $product->get_id() ) ) {
-            return $price;
-        }
-
-        $price_is_per      = yit_get_prop( $product, '_ywsbs_price_is_per' );
-        $price_time_option = yit_get_prop( $product, '_ywsbs_price_time_option' );
-        $max_length = get_post_meta( get_the_ID(), '_ywsbs_max_length', true );
-
-        $price_time_option_string = $max_length > 1 ? $max_length . " " . $price_time_option : $price_time_option;
-
-        if( $price_time_option == "months" ){
-
-            if( $max_length == 12 ){
-
-                $price_time_option_string = "year";
-
-            }else if( $max_length == 24 ){
-
-                $price_time_option_string = "2 year";
-
-            }
-
-        }
-
-        $price .= ' / ' . $price_time_option_string;
-
-        return $price;
-
-    }
 
     public static function loop_shop_per_page( $per_page ) {
 
@@ -335,24 +339,79 @@ class SedShopWoocommerceArchiveModule{
 
     }
 
-    public function set_content_product(){
+    public function set_content_product(){ //
 
         remove_action( 'woocommerce_after_shop_loop_item_title' , 'woocommerce_template_loop_rating' , 5 );
 
         //remove_action( 'woocommerce_after_shop_loop_item_title' , 'woocommerce_template_loop_price' , 10 );
 
-        remove_action( 'woocommerce_after_shop_loop_item' , 'woocommerce_template_loop_add_to_cart' , 10 );
+        //remove_action( 'woocommerce_after_shop_loop_item' , 'woocommerce_template_loop_add_to_cart' , 10 );
 
-        add_action( 'woocommerce_after_shop_loop_item' , array( __CLASS__ , 'add_more_detail' ) , 10 );
+        //add_action( 'woocommerce_after_shop_loop_item' , array( __CLASS__ , 'add_more_detail' ) , 10 );
+
+        add_action( 'woocommerce_before_shop_loop_item_title' , array( __CLASS__ , 'start_before_item_title' ) , 0  );
+
+        add_action( 'woocommerce_before_shop_loop_item_title' , array( __CLASS__ , 'add_wishlist' ) , 20  );
+
+        add_action( 'woocommerce_before_shop_loop_item_title' , array( __CLASS__ , 'end_before_item_title' ) , 100  );
+
+        remove_action( 'woocommerce_before_shop_loop_item' , 'woocommerce_template_loop_product_link_open' , 10 );
+
+        add_action( 'woocommerce_shop_loop_item_title' , 'woocommerce_template_loop_product_link_open' , 0 );
+
+        add_action( 'woocommerce_shop_loop_item_title' , array( __CLASS__ , 'add_product_sub_title' ) , 15 );
 
         add_action( 'woocommerce_after_subcategory' , array( __CLASS__ , 'enter_to_product' ) , 20 , 1 );
 
         add_action( 'woocommerce_after_subcategory_title' , array( __CLASS__ , 'add_cat_sub_title' ) , 10 , 1 );
 
-
+        add_filter( 'woocommerce_product_add_to_cart_text' , array( __CLASS__ , 'simple_product_add_to_cart_text' ) , 100 , 2 );
 
     }
 
+    public static function simple_product_add_to_cart_text( $text , $product ){
+
+        if( $product->get_type() == "simple" ) {
+
+            $text = $product->is_purchasable() && $product->is_in_stock() ? __('Shop', 'woocommerce') : __('Read more', 'woocommerce');
+        }
+
+        return $text;
+
+    }
+
+    public static function add_wishlist(){
+
+        echo do_shortcode( '[yith_wcwl_add_to_wishlist icon="fa fa-heart"]' );
+
+    }
+
+    public static function add_product_sub_title(){
+
+        $second_title = get_post_meta( get_the_ID() , 'wpcf-product-second-title' , true );
+        ?>
+
+        <span class="product-second-title"><?php echo $second_title; ?></span>
+
+        <?php
+
+    }
+
+    public static function start_before_item_title(){
+
+        ?>
+        <div class="negar-product-archive-thumbnail">
+        <?php
+
+    }
+
+    public static function end_before_item_title(){
+
+        ?>
+        </div>
+        <?php
+
+    }
 
     public static function add_more_detail(){
 
@@ -431,24 +490,6 @@ class sedShopWoocommerceMyAccountModule{
         add_action( 'woocommerce_add_to_cart', array( $this, 'direct_order' ), 1000, 6 );
 
         add_action( 'wp_loaded', array( __CLASS__, 'add_to_cart_action' ), 19 );
-
-        add_filter( 'woocommerce_add_to_cart_validation' , array( __CLASS__, 'add_to_cart_validation' ), 1000 , 2 );
-
-    }
-
-    public static function add_to_cart_validation( $validate , $product_id ){
-
-        $tanin_product_type = get_post_meta( $product_id , 'wpcf-sed-product-tanin-type' , true );
-
-        if ( in_array( $tanin_product_type , array( 'online' , 'reservation' ) ) && !tanin_is_user_subscription() ) {
-
-            $validate = false;
-
-            wc_add_notice(__('For use our Site Features you need to buy a subscription', 'woocommerce'), 'error');
-
-        }
-
-        return $validate;
 
     }
 
@@ -994,46 +1035,6 @@ if( class_exists( 'WooCommerce_Product_Options' ) ){
     $woocommerce_product_options_product_option_group = new TaninProductOptionsGroup();
 
 }
-
-function tanin_is_user_subscription(){
-
-    $has_subscription = false;
-
-    if( !is_user_logged_in() ){
-
-        return $has_subscription;
-
-    }
-
-    $current_user = wp_get_current_user();
-
-    $customer_id  = $current_user->ID;
-
-    $args = array(
-        'post_type'         => YWSBS_Subscription()->post_type_name,
-        'posts_per_page'    => -1,
-        'post_status'       => 'publish',
-        'meta_query'        => array(
-            'relation'      => 'AND',
-            array(
-                'key'       => '_status',
-                'value'     => 'active'
-            ),
-            array(
-                'key'       => '_user_id',
-                'value'     => $customer_id
-            ),
-        ),
-    );
-
-    $query = new WP_Query( $args );
-
-    $has_subscription = $query->post_count > 0 ? true : $has_subscription;
-
-    return $has_subscription;
-
-}
-
 
 /*class SedAdminProductAttrsSettings{
 
