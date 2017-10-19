@@ -3684,9 +3684,131 @@ select.woocommerce-currency-switcher {
   height:48px;
 }
 
+
+
+
+/**********************************************/
+
+.sliders-img .row {
+    margin: 0;
+}
+
+.sliders-img .row > div {
+    padding: 0;
+}
+
+.sliders-img img {
+    height: auto;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+}
+
+.sliders-img .content-container {
+    padding: 10px;
+    padding-left: 0;
+}
+
+.rtl .sliders-img .content-container {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+.sliders-img .content-container .desc {
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+
+    .sliders-img .margin-top-box {
+        margin-top: -100px; 
+    }
+
+    .sliders-img .margin-left-box {
+    	margin-left: -8.33333333%;
+    } 
+
+}
+
+.sliders-img .slick-slider {
+    margin-bottom: 0px;
+}
+
+.sliders-img .title-general {
+    margin: 10px;    
+}
+
+.sliders-img .slide-item {
+    position: relative;
+    display: inline-block;
+}
+
+.sliders-img .arrows-box {
+    height: 230px;
+    width: 230px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    background-color: #00a594;
+    padding: 88px 0;
+    text-align: center;
+}
+
+.sliders-img .arrows-box .arrow {
+    width: 20px;
+    height: 48px;    
+    margin: 0 25px;
+    display: inline-block;
+    background-size: 100% auto;
+    background-repeat: repeat-x;
+    background-position: center top;
+    font-size: 0;
+    cursor: pointer;
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.sliders-img .arrows-box .arrow.previous {
+    background-image: url(images/large_left3.png);
+}
+
+.sliders-img .arrows-box .arrow.next {
+    background-image: url(images/large_right3.png);
+}
+
+.sliders-img .arrows-box .arrow:hover {
+	opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+    .sliders-img .content-container ,
+    .sliders-img .row > div {
+        text-align: center;
+    }
+
+    .sliders-img .black-box,
+    .sliders-img .logo-box {
+        display: none !important;
+    }
+
+    .sliders-img .arrows-box {
+        width: 100%;
+    }    
+}
+
+
+/***************************/
+
+
 /**
 Shop & Product
 *********/
+
 .negar-product-archive-thumbnail{
-  position: relative;
+    position: relative;
 }

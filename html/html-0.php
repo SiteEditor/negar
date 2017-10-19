@@ -2,6 +2,166 @@
 <div class="general-separator-sm"></div>
 
 <!--============================================-->
+
+<!-- margin-top-box 
+
+
+
+
+            <div class="col-sm-1 text-right" >
+                <div class="black-box">&nbsp;</div>         
+            </div>
+
+            <div class="clear"></div> 
+
+            <div class="clear"></div>
+
+            <div class="col-sm-2">&nbsp;</div>  
+
+            <div class="col-sm-2">&nbsp;</div> 
+
+            <div class="col-sm-5">
+                        
+            </div>
+
+            <div class="spr-general"></div>
+
+
+
+
+
+
+-->
+
+	<div class="sliders-img">
+
+        <div class="row">
+
+        	<div class="col-sm-6 margin-top-box">
+
+                <div class="row">
+
+                	<div class="col-sm-11">
+
+			            <div class="slide-container slide-first">
+
+		                    <div class="slide-item">
+		                        <img src="http://localhost/mafir/wp-content/uploads/2017/07/2-1-640x640.jpg">  
+		                    </div>
+			            	
+			            </div>
+
+			    	</div>
+
+            		<div class="clear"></div>
+                  
+                    <div class="col-sm-6">&nbsp;</div>
+
+		            <div class="col-sm-5">
+
+		                <div class="image-container">
+		                    <img src="http://localhost/mafir/wp-content/uploads/2017/07/2-1-640x640.jpg"> 
+		                </div>
+		                        
+		            </div>
+                  
+                    <div class="col-sm-1">&nbsp;</div>
+
+	            </div>
+
+            </div>  
+
+            <div class="col-sm-6">
+                <div class="row">
+
+                	<div class="col-sm-12">
+
+                        <div class="content-container">
+                            <div class="punchline">
+                                <div class="title"><h3>محصولات...</h3></div>
+                                <p class="desc">لورم ایپسوم یا طرح‌نما به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد. </p>
+                            </div>
+                        </div>
+
+		            </div>
+                  
+                    <div class="col-sm-12">&nbsp;</div>
+                  
+                    <div class="col-sm-12">&nbsp;</div>
+                  
+                    <div class="col-sm-12">&nbsp;</div>
+                  
+                    <div class="clear"></div>
+
+            		<div class="col-sm-12">
+
+                        <div class="margin-left-box">
+                            <div class="arrows-box mafiran-next-prev-controler">
+                                <span class="arrow previous"><i class="fa fa-angle-left"></i></span>
+                                <span class="arrow next"><i class="fa fa-angle-right"></i></span>
+                            </div>
+                        </div>
+            			
+            		</div>
+
+            		<div class="clear"></div>
+                  
+                    <div class="col-sm-1">&nbsp;</div>
+
+            		<div class="col-sm-11"> 
+
+                        <div class="text-left">
+
+			                <div class="slide-container slide-second sed-mafiran-slider">
+
+			                    <div class="slide-item">
+			                        <img src="http://localhost/mafir/wp-content/uploads/2017/07/2-1-640x640.jpg"> 
+			                    </div>
+
+			                </div>
+
+                        </div>
+            			
+            		</div>
+
+                </div>  
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--============================================-->
 <div class="image-content-box">
 
     <div class="image-content-box-skin1">
