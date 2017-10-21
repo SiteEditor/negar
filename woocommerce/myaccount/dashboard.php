@@ -45,6 +45,10 @@ $birthday 	= get_user_meta( $current_user->ID, 'billing_myfield14', true );
 $current_cc  = WC()->checkout->get_value( 'billing_country' );
 $states      = WC()->countries->get_states( $current_cc );
 
+$subscriber = mailster('subscribers')->get_by_wpid( $current_user->ID );
+
+$newsletter = $subscriber && $subscriber->status == 1 ? __( "Yes" , "sed-shop" ) : __( "NO" , "sed-shop" );
+
 ?>
 
 <div class="woocommerce-user-dashboard">
@@ -100,7 +104,7 @@ $states      = WC()->countries->get_states( $current_cc );
 
 					<ul>
 
-						<li> <span class="info-label"><?php _e( "Subscription:" , "sed-shop" );?></span> <span class="info-value"><?php //if( tanin_is_user_subscription() ) echo esc_html__( "Yes" , "tanin" ); else echo esc_html__( "No" , "tanin" );?></span> </li>
+						<li> <span class="info-label"><?php _e( "NewsLetter:" , "sed-shop" );?></span> <span class="info-value"><?php echo $newsletter;?></span> </li>
 
 						<li> <span class="info-label"><?php _e( "Birthday:" , "sed-shop" );?></span> <span class="info-value"><?php echo esc_html( $birthday );?></span> </li>
 
@@ -119,9 +123,9 @@ $states      = WC()->countries->get_states( $current_cc );
 
 			<div class="user-info-buttons text-right">
 
-				<button class="secondary" type="button"><a class="custom-btn custom-btn-primary" href="<?php echo esc_url( wc_get_endpoint_url( 'edit-address' , 'billing' , wc_get_page_permalink( 'myaccount' ) ) );?>"><?php _e( "Edit Account Info" , "sed-shop" );?></a></button>
+				<button class="" type="button"><a class="custom-btn custom-btn-primary" href="<?php echo esc_url( wc_get_endpoint_url( 'edit-address' , 'billing' , wc_get_page_permalink( 'myaccount' ) ) );?>"><?php _e( "Edit Account Info" , "sed-shop" );?></a></button>
 
-				<button class="secondary" type="button"><a class="custom-btn custom-btn-primary" href="<?php echo esc_url( wc_get_endpoint_url( 'edit-account' , '' , wc_get_page_permalink( 'myaccount' ) ) );?>"><?php _e( "Change Password" , "sed-shop" );?></a></button>
+				<button class="" type="button"><a class="custom-btn custom-btn-primary" href="<?php echo esc_url( wc_get_endpoint_url( 'edit-account' , '' , wc_get_page_permalink( 'myaccount' ) ) );?>"><?php _e( "Change Password" , "sed-shop" );?></a></button>
 
 			</div>
 
