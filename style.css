@@ -4136,7 +4136,9 @@ Shop & Product
 }
 
 .woocommerce-cart-form .product-thumbnail,
-.woocommerce-cart-form .product-name {
+.woocommerce-cart-form .product-name,
+tr.woocommerce-orders-table__row.order-explain .product-thumbnail,
+tr.woocommerce-orders-table__row.order-explain .product-name{
   display: inline-block;
   vertical-align: middle;
 }
@@ -4145,10 +4147,16 @@ Shop & Product
   max-width: 90px;
 }
 
-.woocommerce-cart-form .product-thumbnail {
+.woocommerce-cart-form .product-thumbnail,
+tr.woocommerce-orders-table__row.order-explain .product-thumbnail{
   border: 1px solid #b7b7b7;
   padding: 3px;
   margin-right: 10px;
+}
+
+tr.woocommerce-orders-table__row.order-explain .product-thumbnail img {
+  max-width: 90px;
+  margin-bottom: -9px;
 }
 
 .woocommerce-page table.cart td.actions .coupon > label,
@@ -4183,13 +4191,24 @@ input#coupon_code {
   text-align: left;
 }
 
-#wc-giftwrap a.btn {
+tr.woocommerce-orders-table__row.order-explain .order-actions{
+  padding: 0px 20px 10px;
+  text-align: right;
+}
+
+#wc-giftwrap a.btn,
+tr.woocommerce-orders-table__row.order-explain .order-actions .woocommerce-button.button{
   background-color: #019670;
   display: table-cell;
   color: #fff;
   padding: 0 25px;
   line-height: 35px;
   text-transform: uppercase;
+}
+
+tr.woocommerce-orders-table__row.order-explain .order-actions .woocommerce-button.button{
+  display: inline-block;
+  margin-left: 7px;
 }
 
 .woocommerce-page table.cart td.actions .coupon .button,
@@ -4263,7 +4282,7 @@ section.error-404.not-found.sed-404-one-column {
   border-right-color: #98a6e2;
 }
 
-.my_account_orders.account-orders-table tbody tr:last-child td{
+.my_account_orders.account-orders-table tbody tr.last-order-item td{
   border-bottom-color: #98a6e2;
 }
 
@@ -4272,3 +4291,146 @@ section.error-404.not-found.sed-404-one-column {
   border-bottom-color: #98a6e2;
   border-top-width: 10px;
 }
+
+tr.woocommerce-orders-table__row.order-explain {
+  display: none;
+}
+
+tr.woocommerce-orders-table__row.order-explain .products-information{
+  text-align: left;
+}
+
+tr.woocommerce-orders-table__row.order-explain .products-information {
+  padding: 20px 20px 10px;
+}
+
+tr.woocommerce-orders-table__row.order-explain .product-info {
+  padding-bottom: 20px;
+}
+
+tr.woocommerce-orders-table__row.order-explain .product-info .product-title{
+  color: #1c39bb;
+}
+
+tr.woocommerce-orders-table__row a.woocommerce-button.button.view-details {
+  text-indent: -99999px;
+  overflow: hidden;
+  display: block;
+  background-image: url("images/order-view-down.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+tr.woocommerce-orders-table__row a.woocommerce-button.button.view-details.active{
+  background-image: url("images/order-view-up.png");
+}
+
+
+td.woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-number a,
+tr.woocommerce-orders-table__row.order-explain .woocommerce-Price-amount.amount {
+  color: #019670;
+}
+
+/** Order Steps **/
+
+.progress {
+  overflow: hidden;
+  height: 20px;
+  margin-bottom: 20px;
+  background-color: #989898;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.progress-bar {
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #337ab7;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+
+.progress.active .progress-bar,
+.progress-bar.active {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+
+.bs-wizard {margin-top: 40px;}
+
+/*Form Wizard*/
+.bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
+.bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
+.bs-wizard > .bs-wizard-step + .bs-wizard-step {}
+.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
+.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot{
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  display: block;
+  background: #fbe8aa;
+  top: 45px;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -30px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100%;
+}
+
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot.step1{
+  background-image: url("images/step1.png");
+}
+
+.bs-wizard > .bs-wizard-step.complete > .bs-wizard-dot.step1{
+  background-image: url("images/step1-active.png");
+}
+
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot.step2{
+  background-image: url("images/step2.png");
+}
+
+.bs-wizard > .bs-wizard-step.complete > .bs-wizard-dot.step2{
+  background-image: url("images/step2-active.png");
+}
+
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot.step3{
+  background-image: url("images/step3.png");
+}
+
+.bs-wizard > .bs-wizard-step.complete > .bs-wizard-dot.step3{
+  background-image: url("images/step3-active.png");
+}
+
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot.step4{
+  background-image: url("images/step4.png");
+}
+
+.bs-wizard > .bs-wizard-step.complete > .bs-wizard-dot.step4{
+  background-image: url("images/step4-active.png");
+}
+
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; /*background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px;*/ }
+.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 30px 0;}
+.bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fac736;}
+.bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
+.bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
+.bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
+.bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
+.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #888888;}
+.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
+.bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
+.bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
+.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }

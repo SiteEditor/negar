@@ -215,7 +215,17 @@
             }
         });
 
+        $( ".woocommerce-orders-table .woocommerce-button.button.view-details" ).click(function(e) {
 
+            e.preventDefault();
+
+            var nextTr = $(this).parents("tr:first").next(".order-explain");
+
+            nextTr.toggle( "slow" );
+
+            $(this).toggleClass( 'active' );
+
+        });
 
         /**
          * Loading
