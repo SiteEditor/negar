@@ -1835,12 +1835,13 @@ body .in-btn-back-module #return-to-top i:hover {
 
 .image-content-box-skin4 .icb-wrapper {
     display: block;
-    margin: 0 auto;
-    background-color: #f8f8f8;    
+    background-color: transparent;
+    border-bottom: 3px solid #fac736;    
+    position: relative;
 }
 
-.image-content-box-skin4 .icb-wrapper.row > [class*=col-] {
-    padding: 0;
+.image-content-box-skin4 .icb-wrapper > .row > [class*=col-] {
+    position: static;
 }
 
 .image-content-box-skin4 .icb-img img {
@@ -1851,17 +1852,17 @@ body .in-btn-back-module #return-to-top i:hover {
 
 .image-content-box-skin4 .icb-heading {
     display: block;
-    padding: 25px 25px 10px;
+    padding: 0px 0px 10px; 
 }
 
 .image-content-box-skin4 .icb-heading * {
-    color: #88317f;
+    color: #2d47c2;
     margin: 0;
     padding: 0;
 }
 
 .image-content-box-skin4 .icb-content {
-    padding: 0  25px 25px;
+    padding: 0  0px 25px;
     text-align: justify;
 }
 
@@ -1873,7 +1874,25 @@ body .in-btn-back-module #return-to-top i:hover {
 .image-content-box-skin4 .icb-content .button {
     margin-top: 10px;
     display: block;
+    background: #fac736;
+    color: #555;
+    padding: 10px 20px;
+    line-height: 20px;
+    position: absolute;
+    right: 0;
+    bottom: -3px;
 }
+
+.image-content-box:nth-of-type(2n) .image-content-box-skin4 .icb-content .button {
+    right: auto;
+    left: 0;
+}
+
+.image-content-box-skin4 .icb-heading .icb-date {
+	color: #777; 
+}
+
+
 
 /************************************/
 
