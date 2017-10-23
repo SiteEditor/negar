@@ -1862,7 +1862,7 @@ body .in-btn-back-module #return-to-top i:hover {
 }
 
 .image-content-box-skin4 .icb-content {
-    padding: 0  0px 25px;
+    padding: 0  0px 40px;  
     text-align: justify;
 }
 
@@ -1893,6 +1893,34 @@ body .in-btn-back-module #return-to-top i:hover {
 }
 
 
+.image-content-box-skin4 .icb-wrapper .icb-img {
+    position: relative;
+}
+
+.image-content-box-skin4 .icb-wrapper .icb-img .video-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.38em;
+    margin: -0.7em 0 0 -0.7em;
+    text-align: center;
+    color: #00a594;
+    border: 1px solid #00a594;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-size: 45px;
+    padding-left: 0.15em;
+    border-radius: 1000px;
+    cursor: pointer;
+}
+
+.image-content-box-skin4 .icb-wrapper .icb-img .video-icon:before {
+    content: "\f0da";
+    font-family: FontAwesome;
+}
+
+
 
 /************************************/
 
@@ -1910,7 +1938,8 @@ body .in-btn-back-module #return-to-top i:hover {
     display: block;
     overflow: hidden;
     width: 100%;
-    margin-bottom: 25px; 
+    margin-bottom: 0;     
+    border-bottom: 3px solid #fac736; 
 }
 
 .custom-post-type-single .single-img img {
@@ -1921,15 +1950,15 @@ body .in-btn-back-module #return-to-top i:hover {
 
 .custom-post-type-single .single-heading {
     display: block;
-    padding: 15px 20px;
-    background-color: #f2f2f4;    
-    margin-bottom: 15px; 
+    padding: 0;
+    margin: 25px 0 10px;
 }
 
-.custom-post-type-single .single-heading h3 {
+.custom-post-type-single .single-heading h4 {
 	font-weight: bold;
     margin: 0 0 5px;
     padding: 0;
+    color: #2d47c2;
 }
 
 .custom-post-type-single .single-author {
@@ -1939,14 +1968,75 @@ body .in-btn-back-module #return-to-top i:hover {
     font-size: 13px;
 }
 
-.custom-post-type-single .single-content {
-
-}
-
 .custom-post-type-single .single-content * {
     margin: 0; 
     padding: 0;
 }
+
+.custom-post-type-single .single-wrapper .single-date-day {
+    background-color: #fac736;
+    display: block;
+    width: 40px;
+    text-align: center;
+    height: 50px;
+    line-height: 75px;
+}
+
+.custom-post-type-single .single-wrapper .single-date {
+    color: #777;
+}
+
+.custom-post-type-single .single-wrapper .single-date-mounth {
+    color: #2d47c2;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+    display: block;
+    width: 40px;
+    border-bottom: 2px solid #000;
+    margin-top: 8px;
+}
+
+/************************************/
+
+#comments .comment-form-comment {
+    width: 50%;
+    float: left;
+}
+
+#comments .comment-form-author,
+#comments .comment-form-email {
+    width: 50%;
+    float: right;
+    padding-left: 20px;
+}
+
+#comments .comment-form-url {
+    display: none;
+}
+
+#comments .comment-form-author input ,
+#comments .comment-form-email input {
+    height: 65px;
+}
+
+#comments .comment-form-comment textarea {
+    height: 154px; 
+}
+
+#comments .comment-notes ,
+#comments .form-submit {
+    clear: both;
+}
+
+#comments .comment-author img.avatar {
+    display: none;
+}
+
+#comments .comment-reply-link {
+    color: #019670;
+}
+
 
 
 /****************************/

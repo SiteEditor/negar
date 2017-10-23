@@ -43,6 +43,9 @@ $img = get_sed_attachment_image_html( $attachment_id , "" , "800×500" );
             }
 
         ?>
+
+        <div class="video-icon"></div>
+
         </div>
     </div>
 

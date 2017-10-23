@@ -17,16 +17,22 @@
 
 	<div class="custom-post-type-single">
 	    <div class="single-wrapper">
+	        <div class="single-img-wrap"> 
+		        <div class="single-img">    	
+		        	<?php if ( '' !== get_the_post_thumbnail() ) : ?>
+		                <?php the_post_thumbnail( 'twentyseventeen-featured-image' ); ?>
+		            <?php endif; ?>
+		        </div> 
+	            <div class="single-date-wrap">
+	            	<span class="single-date-day">13</span>
+	            	<span class="single-date-mounth">SEP</span>
+	            </div>   
+	        </div> 
 	        <div class="single-heading">
 	            <div class="single-heading-inner">
-	                <h3><?php the_title(); ?></h3>
-	                <span><?php _e("By","twentyseventeen") ?>&nbsp;<span class="single-author"><?php the_author(); ?></span></span>
+	                <h4><?php the_title(); ?></h4>
+	                <span class="single-date">2015 London October</span>
 	            </div>
-	        </div>
-	        <div class="single-img">        	
-	        	<?php if ( '' !== get_the_post_thumbnail() ) : ?>
-	                <?php the_post_thumbnail( 'twentyseventeen-featured-image' ); ?>
-	            <?php endif; ?>
 	        </div>
 	        <div class="single-content">
 	            <div class="single-content-inner">
