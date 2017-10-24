@@ -25,7 +25,7 @@ if ( $related_products ) : ?>
 	<section class="related products">
 
 		<header>
-			<h2><?php esc_html_e( 'Related products', 'woocommerce' ); ?></h2>
+			<h2 class="text-center"><?php esc_html_e( 'Related products', 'woocommerce' ); ?></h2>
 			<div class="general-separator"> </div>
 		</header>
 		

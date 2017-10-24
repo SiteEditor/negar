@@ -37,6 +37,15 @@ get_header(); ?>
 
 						}
 
+						?>
+						<div class="post-author-comment-meta">
+
+							<span class="author"><i class="fa fa-user"></i><?php printf( __("By: %s" , "negar") , get_the_author() );?></span>
+
+							<span class="comment-count"><i class="fa fa-comment"></i><?php printf( __("%s Comments" , "negar") , get_comments_number() );?></span>
+
+						</div>
+						<?php
 						// If comments are open or we have at least one comment, load up the comment template.
 						if (comments_open() || get_comments_number()) :
 							comments_template();
