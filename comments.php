@@ -79,7 +79,29 @@ if ( post_password_required() ) {
 	<?php
 	endif;
 
-	comment_form();
+	$commenter = wp_get_current_commenter();
+	$req = get_option( 'require_name_email' );
+	$aria_req = ( $req ? " aria-required='true'" : '' );
+
+	$fields =  array(
+
+		'author' =>
+			'<p class="comment-form-author"><input id="author" name="author" placeholder="' . __( 'Name', 'twentyseventeen' ) . ( $req ? '*' : '' ) . '" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
+			'" size="30"' . $aria_req . ' /></p>',
+
+		'email' =>
+			'<p class="comment-form-email"><input id="email" name="email"  placeholder="' . __( 'Email', 'twentyseventeen' ) . ( $req ? '*' : '' ) . '" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) .
+			'" size="30"' . $aria_req . ' /></p>'
+	);
+
+	comment_form(
+		array(
+			'fields' 			=> $fields ,
+			'comment_field' 	=>  '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment', 'noun' ) .
+				'</label><textarea id="comment" name="comment" placeholder="' . __( 'Comment', 'twentyseventeen' ) . '*" cols="45" rows="8" aria-required="true">' .
+				'</textarea></p>',
+		)
+	);
 	?>
 
 </div><!-- #comments -->
