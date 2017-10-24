@@ -2328,8 +2328,8 @@ ul.products li.product .button:hover {
 .woocommerce ul.products li.product.negar-product-type-gift-card .product_type_variable, 
 .woocommerce ul.products li.product.negar-product-type-gift-card .add_to_cart_button, 
 .woocommerce ul.products li.product.negar-product-type-gift-card .tanin-more-details-button {
-    border: 4px solid #fff;
-    box-shadow: 0 0 0 1px #ddd;
+    border: 4px solid #fff; 
+    box-shadow: 0 0 0 1px #ccc;
     color: #333;
 }
 
@@ -2348,6 +2348,10 @@ ul.products li.product .button:hover {
     background-color: #02a592;
     border-color: #fff;
     color: #fff;
+}
+
+.woocommerce ul.products li.product.negar-product-type-gift-card .price {
+    color: #02a592;
 }
 
 .woocommerce ul.products li.product .tanin-more-details-button:before {
