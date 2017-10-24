@@ -25,13 +25,17 @@ body{
 }
 
 h1, h2, h3 {
-    letter-spacing: 4px;
+    letter-spacing: 2px; 
     font-weight: bold;
 }
 
 h4, h5, h6 {
     letter-spacing: 2px;
     font-weight: bold;
+}
+
+p {
+    margin: 0 0 0.8em;
 }
 
 /* Alignment*/
@@ -2004,6 +2008,11 @@ body .in-btn-back-module #return-to-top i:hover {
     float: left;
 }
 
+body.logged-in #comments .comment-form-comment {
+    width: 100%;
+    float: none; 
+}
+
 #comments .comment-form-author,
 #comments .comment-form-email {
     width: 50%;
@@ -2039,14 +2048,15 @@ body .in-btn-back-module #return-to-top i:hover {
 
 #comments {
     border-top: 1px solid #00a594;    
-    margin-top: 2.5em;
-    padding-top: 2.5em; 
+    margin-top: 2em;
+    padding-top: 2em;  
 }
 
 #comments ol.comment-list li > .comment-body {
     border-bottom: 1px solid #00a594;
     padding-bottom: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 30px;    
+    font-size: 20px;
 }  
 
 #comments .comment-list ol.children {
@@ -2055,9 +2065,33 @@ body .in-btn-back-module #return-to-top i:hover {
 
 #comments .comments-title , 
 #comments .comment-reply-title {
-    font-size: 18px; 
+    font-size: 25px; 
     color: #2d47c2; 
 }
+
+#comments .comments-title { 
+    margin-bottom: 20px; 
+}
+
+#comments .comment-metadata {
+    color: #777;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+#comments .comment-metadata a {
+    color: #777;
+}
+
+#comments .comment-meta {
+    margin-bottom: 0.4em;
+}
+
+#comments .comment-author {
+    margin-bottom: 0.2em;
+    font-size: 22px;
+}
+
 
 
 /****************************/
