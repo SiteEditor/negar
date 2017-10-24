@@ -2325,6 +2325,31 @@ ul.products li.product .button:hover {
     color: #fbc638;
 }
 
+.woocommerce ul.products li.product.negar-product-type-gift-card .product_type_variable, 
+.woocommerce ul.products li.product.negar-product-type-gift-card .add_to_cart_button, 
+.woocommerce ul.products li.product.negar-product-type-gift-card .tanin-more-details-button {
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 1px #ddd;
+    color: #333;
+}
+
+.woocommerce ul.products li.product.negar-product-type-gift-card:hover .product_type_variable ,
+.woocommerce ul.products li.product.negar-product-type-gift-card:hover .add_to_cart_button ,
+.woocommerce ul.products li.product.negar-product-type-gift-card:hover .tanin-more-details-button , 
+.woocommerce ul.products li.product.negar-product-type-gift-card .product_type_variable:hover ,
+.woocommerce ul.products li.product.negar-product-type-gift-card .product_type_variable:focus , 
+.woocommerce ul.products li.product.negar-product-type-gift-card .product_type_variable:active ,
+.woocommerce ul.products li.product.negar-product-type-gift-card .add_to_cart_button:hover ,
+.woocommerce ul.products li.product.negar-product-type-gift-card .add_to_cart_button:focus ,
+.woocommerce ul.products li.product.negar-product-type-gift-card .add_to_cart_button:active ,
+.woocommerce ul.products li.product.negar-product-type-gift-card .tanin-more-details-button:hover ,
+.woocommerce ul.products li.product.negar-product-type-gift-card .tanin-more-details-button:focus ,
+.woocommerce ul.products li.product.negar-product-type-gift-card .tanin-more-details-button:active {
+    background-color: #02a592;
+    border-color: #fff;
+    color: #fff;
+}
+
 .woocommerce ul.products li.product .tanin-more-details-button:before {
     content: "\f07a" ; /* "\f022"; */
     font-family: FontAwesome;
@@ -2344,6 +2369,14 @@ ul.products li.product .button:hover {
 
 .woocommerce .woocommerce-form-login .u-column1.col-1:last-child .form-row {
     margin: 0;
+}
+
+.woocommerce ul.products li.negar-product-type-gift-card.product .product-second-title {
+    display: none; 
+}
+
+.woocommerce ul.products li.negar-product-type-gift-card.product .woocommerce-loop-product__title {
+    color: #1c39bb;
 }
 
 /*************/
