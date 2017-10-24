@@ -27,7 +27,7 @@ $heading = esc_html( apply_filters( 'woocommerce_product_description_heading', _
 ?>
 
 <?php if ( $heading ) : ?>
-  <h2><?php echo $heading; ?></h2>
+  <h2 class="text-center"><?php echo $heading; ?></h2>
   <div class="general-separator"> </div>
 <?php endif; ?>
 
