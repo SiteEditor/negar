@@ -191,16 +191,17 @@ function tanin_per_page_query( $query ) {
 
     if ( $query->is_main_query() && ! $query->is_feed() && ! is_admin() && $is_taxonomy  ) {
         $query->set( 'posts_per_page', '6' ); //Change this number to anything you like.
-    }
+    }*/
 
     $post_type = $query->get('post_type');
 
-    $is_post_type = in_array( $post_type , array( 'product' , 'project' ) );
+    $is_post_type = in_array( $post_type , array( 'press_media' ) );
 
     if ( $query->is_main_query() && ! $query->is_feed() && ! is_admin() && $is_post_type && is_post_type_archive() ) {
-        $query->set( 'posts_per_page', '6' ); //Change this number to anything you like.
+        $query->set( 'posts_per_page', '2' ); //Change this number to anything you like.
     }
 
+    /*
     $is_post_type = in_array( $post_type , array( 'service' ) );
 
     if ( $query->is_main_query() && ! $query->is_feed() && ! is_admin() && $is_post_type && is_post_type_archive() ) {

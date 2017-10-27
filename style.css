@@ -2271,7 +2271,7 @@ ul.products li.product .button:hover {
 .woocommerce .slick-slider.products li.product, 
 .woocommerce-page .slick-slider.products li.product {
     border: 0 none #f2f2f2;
-    margin: 7px 0px;
+    margin: 7px 0;
     -webkit-box-shadow: 0 0 0 1px #f2f2f2;
     box-shadow: 0 0 0 1px #f2f2f2;
     clear: none;
@@ -4338,6 +4338,8 @@ select.woocommerce-currency-switcher {
 
 .woocommerce.single-product .related ul.products {
 	margin-top: 20px;
+    /*margin-right: -8px;
+    margin-left: -8px;*/
 }
 
 
@@ -4680,3 +4682,66 @@ tr.woocommerce-orders-table__row.order-explain .woocommerce-Price-amount.amount 
 .bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
 .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
 .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
+
+
+.prdctfltr_filter.prdctfltr_text {
+  max-width: 300px;
+}
+
+.pf_default_select .prdctfltr_filter>span, .pf_select .prdctfltr_filter>span{
+  padding: 7px 32px 7px 15px !important;
+  border: 1px solid #b7b7b7 !important;
+}
+
+.prdctfltr_wc.prdctfltr_woocommerce.pf_select i.prdctfltr-down, .prdctfltr_wc.prdctfltr_woocommerce.pf_select i.prdctfltr-up {
+  top: 12px !important;
+  right: 21px !important;
+  z-index: 1;
+}
+
+.prdctfltr_regular_title:after {
+  content: "";
+  border-left: 1px solid #b7b7b7;
+  position: absolute;
+  height: 40px;
+  width: 39px;
+  top: 4px;
+  right: 11px;
+  background-color: #eee;
+  z-index: 0;
+}
+
+span.prdctfltr_regular_title {
+  line-height: 26px;
+  height: 42px;
+}
+
+.prdctfltr_wc {
+  margin-bottom: 25px !important;
+  margin-top: 5px !important;
+}
+
+.woocommerce ul.products li.product.negar-product-type-gift-card .woocommerce-loop-product__title{
+   font-size: 22px;
+   margin-top: 15px;
+}
+
+.woocommerce ul.products li.product.negar-product-type-gift-card .price{
+   font-size: 28px;
+   font-weight: bold;
+   margin-bottom: 15px;
+   margin-top: 10px;
+}
+
+.woocommerce ul.products li.product.negar-product-type-gift-card{
+  width: 33.33%;
+}
+
+.woocommerce ul.products li.product span.woocs_price_code.free-product {
+  letter-spacing: 0;
+  font-weight: bold;
+}
+
+.custom-post-type-single .single-img.video-type{
+  max-height: 680px;
+}

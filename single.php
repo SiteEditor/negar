@@ -27,7 +27,7 @@ get_header(); ?>
 					 */
 					$disable_comments = (bool)get_theme_mod( 'sed_disable_single_post_comments' , '0' );
 
-					if( $disable_comments === false || site_editor_app_on() ) {
+					if( ( $disable_comments === false || site_editor_app_on() ) && is_singular("post") ) {
 
 						if( site_editor_app_on() ) {
 

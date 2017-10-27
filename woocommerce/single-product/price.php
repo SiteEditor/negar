@@ -36,8 +36,8 @@ if( $type == "simple" ){
 
 }
 
-if( !$is_simple_free ) {
+//if( !$is_simple_free ) {
 	?>
 	<div class="price"><?php echo $product->get_price_html(); ?></div>
 	<?php
-}
+//}

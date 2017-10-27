@@ -42,11 +42,18 @@ $img = get_sed_attachment_image_html( $attachment_id , "" , "800×500" );
                 echo $img['thumbnail'];
             }
 
-        ?>
+            $negar_single_type = get_post_meta( get_the_ID() , "wpcf-negar_single_type" , true );
 
-        <div class="video-icon"></div>
+            if( $negar_single_type == "video" ){
+            ?>
 
+            <div class="video-icon"></div>
+
+            <?php
+            }
+            ?>
         </div>
+
     </div>
 
 <?php
@@ -54,6 +61,11 @@ $img = get_sed_attachment_image_html( $attachment_id , "" , "800×500" );
 $image = ob_get_contents();
 ob_end_clean();
 
+$post_type= get_post_type( get_the_ID() );
+
+if( $post_type !== "post" ){
+    $classes[] = "post";
+}
 
 ?>            
 
@@ -73,7 +85,7 @@ ob_end_clean();
     	            <div class="icb-heading">
     	                <div class="icb-heading-inner">
     	                    <h4><?php the_title(); ?></h4>
-                            <span class="icb-date">2015 London October</span>
+                            <span class="icb-date"><?php echo get_the_date('', get_the_ID());?></span>
     	                </div>
     	            </div>
     	            <div class="icb-content">

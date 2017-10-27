@@ -31,11 +31,17 @@ class SedShopWooCommerce{
 
         $this->remove_breadcrumb();
 
-        global $woocommerce_product_options_checkout;
+        add_filter( 'woocommerce_variable_free_price_html', array( __CLASS__ , 'hide_free_price_notice' ) );
 
-        remove_action( 'woocommerce_add_order_item_meta', array( $woocommerce_product_options_checkout, 'woocommerce_add_order_item_meta' ), 10 );
+        add_filter( 'woocommerce_free_price_html', array( __CLASS__ , 'hide_free_price_notice' ) );
 
-        add_action( 'woocommerce_new_order_item ' , array( $woocommerce_product_options_checkout, 'woocommerce_add_order_item_meta' ) , 10 , 3 );
+        add_filter( 'woocommerce_variation_free_price_html', array( __CLASS__ , 'hide_free_price_notice' ) );
+
+    }
+
+    public static function hide_free_price_notice(){
+
+        return "Free";
 
     }
 
@@ -86,6 +92,8 @@ class SedShopWoocommerceSingleProductModule{
         add_filter( "woocommerce_product_single_add_to_cart_text" , array( __CLASS__ , "add_to_cart_text" ) , 100 , 1 );
 
         add_filter( "woocommerce_output_related_products_args" , array( __CLASS__ , "related_products_args" ) , 100 , 1 );
+
+        add_action( "wp" , array( __CLASS__ , "remove_related_prouducts_gift_cards_wrapping" ) , 100 );
 
     }
 
@@ -205,6 +213,11 @@ class SedShopWoocommerceSingleProductModule{
 
         }
 
+
+        if( !$obj->get_regular_price() ) {
+            $price = '<span class="woocs_price_code free-product" data-product-id="392">' . __("Free Packaging", "negar") . '</span>';
+        }
+
         return $price;
 
     }
@@ -281,6 +294,24 @@ class SedShopWoocommerceSingleProductModule{
 
     }
 
+    public static function remove_related_prouducts_gift_cards_wrapping(){
+
+        $queried_object = get_queried_object();
+
+        if( is_singular('product') ){
+
+            $terms = wp_get_post_terms( $queried_object->ID, 'product_cat' , array( "fields" => "slugs" ) );
+
+            if( in_array( 'gift-cards' , $terms ) || in_array( 'occesions' , $terms )  ) {
+
+                remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+
+            }
+
+        }
+
+    }
+
 }
 
 new SedShopWoocommerceSingleProductModule();
@@ -326,7 +357,15 @@ class SedShopWoocommerceArchiveModule{
 
     public static function loop_columns( $columns ) {
 
-        $columns = 4;
+        if( is_product_category('gift-cards') ) {
+
+            $columns = 3;
+
+        }else{
+
+            $columns = 4;
+
+        }
 
         return $columns;
     }
@@ -475,133 +514,14 @@ class sedShopWoocommerceMyAccountModule{
 
         //remove_action( 'woocommerce_account_navigation', 'woocommerce_account_navigation' );
 
-        //add_filter( 'sed_shop_show_login_form_account_page' , array( __CLASS__ , 'show_login_form' ) , 100 , 1 );
-
         //add_filter( "sed_theme_options_panels_filter" , array( $this , 'register_theme_panels' ) , 100 );
 
         //add_filter( "sed_theme_options_fields_filter" , array( $this , 'register_theme_fields' ) );
-
-        //add_filter( "woocommerce_process_registration_errors" , array( $this , "validation_error" ) , 100 , 1 );
 
         add_filter( 'woocommerce_account_menu_items', array( $this , 'account_navigation_tems' ) , 100 , 1 );
 
         add_filter( 'woocommerce_my_account_edit_address_title', array( $this , 'edit_address_page_title' ) , 100 , 2 );
 
-        add_action( 'woocommerce_add_to_cart', array( $this, 'direct_order' ), 1000, 6 );
-
-        add_action( 'wp_loaded', array( __CLASS__, 'add_to_cart_action' ), 19 );
-
-    }
-
-    public static function add_to_cart_action(){
-
-        if ( empty( $_REQUEST['add-to-cart'] ) || ! is_numeric( $_REQUEST['add-to-cart'] ) ) {
-            return;
-        }
-
-        if ( empty( $_REQUEST['add-to-cart-direct-order'] ) || $_REQUEST['add-to-cart-direct-order'] != "yes" ) {
-            return;
-        }
-
-        //Empty Cart before add reservation product to cart
-        WC()->cart->empty_cart();
-
-    }
-
-    public function direct_order( $cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data  ){
-
-        if ( empty( $_REQUEST['add-to-cart'] ) || ! is_numeric( $_REQUEST['add-to-cart'] ) ) {
-            return;
-        }
-
-        if ( empty( $_REQUEST['add-to-cart-direct-order'] ) || $_REQUEST['add-to-cart-direct-order'] != "yes" ) {
-            return;
-        }
-
-        if( !is_user_logged_in() ){
-            return;
-        }
-
-        //var_dump( $cart_item_data );
-
-        //exit();
-
-        $current_user = wp_get_current_user();
-
-        $customer_id  = $current_user->ID;//new WC_Customer( $current_user->ID );
-
-        $address = apply_filters( 'woocommerce_my_account_my_address_formatted_address', array(
-            'first_name'  => get_user_meta( $customer_id, 'billing_first_name', true ),
-            'last_name'   => get_user_meta( $customer_id, 'billing_last_name', true ),
-            'company'     => get_user_meta( $customer_id, 'billing_company', true ),
-            'address_1'   => get_user_meta( $customer_id, 'billing_address_1', true ),
-            'address_2'   => get_user_meta( $customer_id, 'billing_address_2', true ),
-            'city'        => get_user_meta( $customer_id, 'billing_city', true ),
-            'state'       => get_user_meta( $customer_id, 'billing_state', true ),
-            'postcode'    => get_user_meta( $customer_id, 'billing_postcode', true ),
-            'country'     => get_user_meta( $customer_id, 'billing_country', true ),
-        ), $customer_id, 'billing' );
-
-        // Now we create the order
-        $order = wc_create_order(array(
-            'customer_id'   => $customer_id,
-        ));
-
-
-        $item_id = $order->add_product( wc_get_product( $product_id ), $quantity ,
-            array(
-                'product_id'    => $product_id,
-                'variation_id'  => $variation_id,
-                'variation'     => $variation,
-                'quantity'      => $quantity,
-                'data'          => $cart_item_data
-            )
-            /*array_merge( $cart_item_data , array(
-                    'product_id'   => $product_id,
-                    'variation_id' => $variation_id,
-                    'variation'    => $variation,
-                    'quantity'     => $quantity,
-                )
-            )*/
-        );
-
-        //add Item Meta to order
-        $this->woocommerce_add_order_item_meta_action( $item_id, $cart_item_data );
-
-        // Set addresses
-        $order->set_address( $address, 'billing' );
-        //$order->set_address( $address, 'shipping' );
-
-        // Set payment gateway
-        $payment_gateways = WC()->payment_gateways->payment_gateways();
-
-        $order->set_payment_method( $payment_gateways['cod'] );
-
-        // Calculate totals
-        $order->calculate_totals();
-
-        //$order->update_status( 'pending' , 'Order created dynamically - ', TRUE);
-
-        WC()->cart->empty_cart();
-
-        wp_safe_redirect( $order->get_view_order_url() );
-
-        exit;
-        
-    }
-
-    /**
-     * Adds data to the order
-     */
-    public function woocommerce_add_order_item_meta_action( $item_id, $cart_item ) {
-        if ( !empty( $cart_item[ '_product_options' ] ) ) {
-            foreach ( $cart_item[ '_product_options' ] as $product_option_id =>
-                      $name_and_value ) {
-                $name = $name_and_value[ 'name' ];
-                $value = $name_and_value[ 'value' ];
-                wc_add_order_item_meta( $item_id, $name, $value );
-            }
-        }
     }
 
     public function edit_address_page_title( $page_title, $load_address ){
@@ -623,14 +543,6 @@ class sedShopWoocommerceMyAccountModule{
         $items['edit-address'] = __( 'Edit Account Info', 'tanin' );
 
         return $items;
-
-    }
-
-    public static function show_login_form( $show ){
-
-        $show = false;
-
-        return $show;
 
     }
 
@@ -668,25 +580,6 @@ class sedShopWoocommerceMyAccountModule{
         );
 
         return $fields;
-
-    }
-
-    public function validation_error( $validation_error ){
-
-        if ( $validation_error->get_error_code() ) {
-
-            return $validation_error;
-
-        }
-
-        if( !isset( $_POST['terms'] ) || $_POST['terms'] != "on" ) {
-
-            return new WP_Error( 'signup_terms_error' , __( 'You must accept term of services if you want to join us.' , 'sed-shop' ) );
-
-        }
-
-
-        return $validation_error;
 
     }
 
@@ -876,346 +769,3 @@ add_filter( 'woocommerce_add_to_cart_fragments', 'my_header_add_to_cart_fragment
 }
 
 new SedShopWoocommerceShortcodes();
-
-if( class_exists( 'WooCommerce_Product_Options' ) ){
-
-    class TaninProductOptionsGroup extends Woocommerce_Product_Options_Product_Option_Group{
-
-
-        function print_options( $position ) {
-            global $wpdb;
-            $sql = "SELECT ID, menu_order FROM {$wpdb->prefix}posts WHERE post_type='product_option_group' AND post_status='publish' ORDER BY menu_order ASC;";
-            $results = $wpdb->get_results( $sql );
-            global $post;
-            $product_post_id = $post->ID;
-            if ( !empty( $results ) ) {
-                foreach ( $results as $result ) {
-                    $product_option_group_id = $result->ID;
-                    $meta = get_post_meta( $product_option_group_id, 'group_options', true );
-                    $print_options = false;
-                    if ( !empty( $meta[ 'any_product' ] ) ) {
-                        $print_options = true;
-                        $product_group_post_id = $product_option_group_id;
-                    } else {
-                        if ( !empty( $meta[ 'categories' ] ) ) {
-                            $categories = $meta[ 'categories' ];
-                            $product_categories = get_the_terms( $product_post_id, 'product_cat' );
-                            if ( !empty( $product_categories ) ) {
-                                foreach ( $product_categories as $product_category ) {
-                                    if ( in_array( $product_category->name, $categories ) ) {
-                                        $print_options = true;
-                                        $product_group_post_id = $product_option_group_id;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        if ( !$print_options && !empty( $meta[ 'query' ] ) ) {
-                            $product_group_post_id = $product_option_group_id;
-                            $product_query = new WP_Query( $meta[ 'query' ] );
-                            if ( $product_query->have_posts() ) {
-                                while ( $product_query->have_posts() ) {
-                                    $product_query->the_post();
-                                    $test_id = get_the_id();
-                                    if ( $test_id === $product_post_id ) {
-                                        $print_options = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            wp_reset_postdata();
-                        }
-                    }
-                    if ( $print_options ) {
-                        $settings = get_post_meta( $product_group_post_id, 'product-options-settings', true );
-                        $above_add_to_cart = value( $settings, 'above_add_to_cart', '' );
-                        $in_variations_add_to_cart = value( $settings, 'in_variations_add_to_cart', '' );
-                        if ( ( $position == 'show_in_list' && !empty( $settings[ 'show_in_list' ] ) ) || empty( $position ) || ( $position == value( $settings, 'location_of_options' ) ) || ( $position == 'above_add_to_cart' && !empty( $above_add_to_cart ) ) || ( $position == 'below_add_to_cart' && empty( $above_add_to_cart ) && empty( $in_variations_add_to_cart ) && empty( $settings[ 'location_of_options' ] ) ) || ( $position == 'in_variations_add_to_cart' && !empty( $in_variations_add_to_cart ) ) ) {
-                            $options = get_post_meta( $product_group_post_id, 'backend-product-options' );
-                            if ( isset( $options[ 0 ] ) && !isset( $options[ 0 ][ 'type' ] ) ) {
-                                $options = $options[ 0 ];
-                            }
-                            print '<div class="product-option-groups">';
-                            do_action( "tanin_start_product_option_groups" , $this );
-                            $this->_print_options( $options, $product_group_post_id, $product_post_id );
-                            print '</div>';
-                        }
-                    }
-                }
-            }
-        }
-
-        function _print_options( $options, $product_option_post_id, $post_id ) {
-
-            //Add the legend
-            $meta = get_post_meta( $product_option_post_id, 'group_options', true );
-            $legend = value( $meta, 'legend' );
-            //Add the accordion
-            $accordion = value( $meta, 'accordion' );
-            $accordion_html = '';
-            $accordion_title_class = '';
-            $accordion_content_class = '';
-            if ( !empty( $accordion ) ) {
-                $accordion_html = ' <span class="accordion-group-expand">+</span> ';
-                $accordion_content_class = 'product-option-accordion-group-content';
-                $accordion_title_class = 'accordion-group';
-            }
-            print '<div class="product-option-group">';
-            if ( !empty( $legend ) ) {
-                print '<fieldset><legend class="' . $accordion_title_class . '">' . get_the_title( $product_option_post_id ) . $accordion_html . '</legend>';
-            } else {
-                //print '<h2 class="' . $accordion_title_class . ' product-option-group-title">' . get_the_title( $product_option_post_id ) . $accordion_html . '</h2>';
-            }
-            print '<div class="' . $accordion_content_class . '">';
-
-            //Add the options
-            global $woocommerce_product_options_product_frontend;
-            $woocommerce_product_options_product_frontend->_print_options( $options, $product_option_post_id, $post_id );
-
-            if ( !empty( $legend ) ) {
-                print '</fieldset>';
-            }
-            print '</div>';
-            print '</div>';
-        }
-
-        /*function __construct() {
-
-            global $woocommerce_product_options_product_frontend;
-
-            remove_action( 'woocommerce_single_variation', array( $woocommerce_product_options_product_frontend, 'woocommerce_before_single_variation' ), 15 );
-            remove_action( 'woocommerce_single_product_summary', array( $woocommerce_product_options_product_frontend, 'woocommerce_single_product_summary_end' ), 60 );
-            remove_action( 'woocommerce_single_product_summary', array( $woocommerce_product_options_product_frontend, 'woocommerce_single_product_summary_before_add_to_cart' ), 25 );
-            remove_action( 'woocommerce_before_single_product_summary', array( $woocommerce_product_options_product_frontend, 'move_price_above_add_to_cart' ) );
-
-            add_action( 'woocommerce_single_product_summary', array( $this, 'woocommerce_single_product_summary_end' ), 60 );
-            add_action( 'woocommerce_single_product_summary', array( $this, 'woocommerce_single_product_summary_before_add_to_cart' ), 25 );
-
-        }
-
-        /**
-         * Displays options after summary
-         */ /*
-        function woocommerce_single_product_summary_before_add_to_cart() {
-            global $post;
-            $settings = get_post_meta( $post->ID, 'product-options-settings', true );
-            $above_add_to_cart = value( $settings, 'above_add_to_cart', '' );
-            if ( !empty( $above_add_to_cart ) || value( $settings, 'location_of_options' ) == 'above_add_to_cart' ) {
-                $this->print_options( 'above_add_to_cart' );
-            }
-            $settings = get_option( 'woocommerce_product_options_settings', array() );
-            if ( empty( $settings[ 'position' ] ) ) {
-                global $woocommerce_product_options_product_option_group;
-                $woocommerce_product_options_product_option_group->print_options( 'above_add_to_cart' );
-            }
-        }
-
-        /**
-         * Displays options after summary
-         */ /*
-        function woocommerce_single_product_summary_end() {
-            global $post;
-            $settings = get_post_meta( $post->ID, 'product-options-settings', true );
-            $above_add_to_cart = value( $settings, 'above_add_to_cart', '' );
-            $in_variations_add_to_cart = value( $settings, 'in_variations_add_to_cart', '' );
-            if ( ( empty( $above_add_to_cart ) && empty( $in_variations_add_to_cart ) && empty( $settings[ 'location_of_options' ] ) ) || value( $settings, 'location_of_options' ) == 'below_add_to_cart' ) {
-                $this->print_options( 'below_add_to_cart' );
-            }
-            $settings = get_option( 'woocommerce_product_options_settings', array() );
-            if ( empty( $settings[ 'position' ] ) ) {
-                global $woocommerce_product_options_product_option_group;
-                $woocommerce_product_options_product_option_group->print_options( 'below_add_to_cart' );
-            }
-        } */
-
-    }
-
-    global $woocommerce_product_options_product_option_group;
-
-    $woocommerce_product_options_product_option_group = new TaninProductOptionsGroup();
-
-}
-
-/*class SedAdminProductAttrsSettings{
-
-    public function __construct(){
-
-        add_action( 'admin_footer', array( $this, 'admin_footer' ) );
-
-        // do_action( 'woocommerce_attribute_added', $wpdb->insert_id, $attribute );
-        add_action( 'woocommerce_attribute_added', array( $this, 'woocommerce_attribute_added'), 10, 2 );
-
-        // do_action( 'woocommerce_attribute_updated', $attribute_id, $attribute, $old_attribute_name );
-        add_action( 'woocommerce_attribute_updated', array( $this, 'woocommerce_attribute_updated'), 10, 3 );
-
-    }
-
-    /**
-     * Get attribute setting
-     * @param  int $attribute_id
-     * @param  string $key
-     * @return mixed
-     */ /*
-    public static function get_attr_setting($attribute_id, $key = null){
-
-        $settings = get_option("_sed_tanin_attr_settings_{$attribute_id}" );
-
-        if($settings && isset($settings[$key])){
-            return $settings[$key];
-        }elseif($settings && $key == null){
-            return $settings;
-        }
-
-        return false;
-    }
-
-    public function woocommerce_attribute_added($attribute_id, $attribute){
-
-        $sed_tanin_attribute_type = isset($_POST['sed_tanin_attribute_type']) ? esc_attr( $_POST['sed_tanin_attribute_type'] ) : false;
-        $sed_tanin_attribute_always_show= isset($_POST['sed_tanin_attribute_always_show']) ? 'yes' : 'no';
-
-        $attr_settings = array(
-            'sed_tanin_attribute_type' => $sed_tanin_attribute_type,
-            'sed_tanin_attribute_always_show' => $sed_tanin_attribute_always_show,
-        );
-
-        update_option( "_sed_tanin_attr_settings_{$attribute_id}", $attr_settings );
-    }
-
-    public function woocommerce_attribute_updated($attribute_id, $attribute, $old_attribute_name){
-
-        $this->woocommerce_attribute_added($attribute_id, $attribute);
-    }
-
-    /**
-     * Attribute Parent Fields
-     */ /*
-
-    public function admin_footer(){
-
-        // temp find page
-        $page = isset($_GET['page']) ? $_GET['page'] : false;
-        $edit = isset($_GET['edit']) ? $_GET['edit'] : false;
-        $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : false;
-
-        if($page !== 'product_attributes' || $taxonomy !== false){
-            return;
-        }
-
-        if(!$edit) {
-
-            // add screen
-            ob_start();
-            ?>
-
-            <div class="form-field">
-                <h3><?php _e('Advanced Attributes Settings', 'tanin'); ?></h3>
-            </div>
-
-            <div class="form-field">
-                <label for="sed_tanin_attribute_type"><?php _e( 'Display Type', 'tanin' ); ?></label>
-                <select name="sed_tanin_attribute_type" id="sed_tanin_attribute_type">
-                    <option value="default"><?php _e( 'Default', 'tanin' ); ?></option>
-                    <option value="date"><?php _e( 'Date', 'tanin' ); ?></option>
-                    <option value="textarea"><?php _e( 'Textarea', 'tanin' ); ?></option>
-                    <option value="text"><?php _e( 'Text', 'tanin' ); ?></option>
-                </select>
-                <p class="description"><?php _e( 'Type of the attribute output (shown on the front-end variation form).', 'tanin' ); ?></p>
-            </div>
-
-            <div class="form-field">
-                <label for="sed_tanin_attribute_always_show"><?php _e( 'Display always on the front-end', 'tanin' ); ?></label>
-                <select name="sed_tanin_attribute_always_show" id="sed_tanin_attribute_always_show">
-                    <option value="no"><?php _e( 'No', 'tanin' ); ?></option>
-                    <option value="above_btn"><?php _e( 'Yes', 'tanin' ); ?></option>
-                </select>
-                <p class="description"><?php _e( 'Display this attribute always on the single product page.', 'tanin' ); ?></p>
-            </div>
-
-            <?php
-            $contents = ob_get_clean();
-            $contents = preg_replace( "/\r|\n/", "", $contents );
-            $contents = preg_replace( "/'/", "\'", $contents );
-            ?>
-            <script type="text/javascript">
-                jQuery(function($){
-                    // insert at bottom of form
-                    $('.form-wrap .form-field:last').after('<?php echo $contents; ?>');
-                });
-            </script>
-            <?php
-        }else{
-
-            $sed_attribute_type = self::get_attr_setting($edit, 'sed_tanin_attribute_type');
-            $sed_attribute_always_show = self::get_attr_setting($edit, 'sed_tanin_attribute_always_show');
-
-            // edit screen
-            ob_start();
-            ?>
-
-            <tr>
-                <td colspan="2"><h3><?php _e( 'Advanced Attributes Settings', 'jcaa' ); ?></h3></td>
-            </tr>
-
-            <tr class="form-field form-required"">
-
-                <th scope="row" valign="top">
-                    <label for="sed_tanin_attribute_type"><?php _e( 'Display Type', 'tanin' ); ?></label>
-                </th>
-
-                <td>
-                    <select name="sed_tanin_attribute_type" id="sed_tanin_attribute_type">
-                        <option value="default" <?php selected( 'default', $sed_attribute_type, true ); ?>><?php _e( 'Default', 'tanin' ); ?></option>
-                        <option value="date" <?php selected( 'date', $sed_attribute_type, true ); ?>><?php _e( 'Date', 'tanin' ); ?></option>
-                        <option value="textarea" <?php selected( 'textarea', $sed_attribute_type, true ); ?>><?php _e( 'Textarea', 'tanin' ); ?></option>
-                        <option value="text" <?php selected( 'text', $sed_attribute_type, true ); ?>><?php _e( 'Text', 'tanin' ); ?></option>
-                    </select>
-                    <p class="description"><?php _e( 'Type of the attribute output (shown on the front-end variation form).', 'tanin' ); ?></p>
-                </td>
-
-            </tr>
-
-            <tr class="form-field form-required"">
-
-                <th scope="row" valign="top">
-                    <label for="sed_tanin_attribute_always_show"><?php _e( 'Display always on the front-end', 'tanin' ); ?></label>
-                </th>
-
-                <td>
-                    <select name="sed_tanin_attribute_always_show" id="sed_tanin_attribute_always_show">
-                        <option value="no" <?php selected( 'no', $sed_attribute_always_show, true ); ?>><?php _e( 'No', 'tanin' ); ?></option>
-                        <option value="yes" <?php selected( 'yes', $sed_attribute_always_show, true ); ?>><?php _e( 'Yes', 'tanin' ); ?></option>
-                    </select>
-                    <p class="description"><?php _e( 'Display this attribute always on the single product page.', 'tanin' ); ?></p>
-                </td>
-
-            </tr>
-
-
-            <?php
-            $contents = ob_get_clean();
-            $contents = preg_replace( "/\r|\n/", "", $contents );
-            $contents = preg_replace( "/'/", "\'", $contents );
-            ?>
-
-            <script type="text/javascript">
-                jQuery(function($){
-                    // insert at bottom of form
-                    $('.form-table tr:last').after('<?php echo $contents; ?>');
-                });
-            </script>
-            <?php
-
-        }
-
-    }
-
-}
-
-function tanin_woo_get_attr_setting($attribute_id, $key = null){
-
-    return SedAdminProductAttrsSettings::get_attr_setting( $attribute_id , $key );
-
-}
-
-new SedAdminProductAttrsSettings(); */

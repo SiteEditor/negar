@@ -62,7 +62,7 @@ get_header(); ?>
 		if ( have_posts() ) : ?>
 			<?php
 			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+			while ( have_posts() ) : the_post(); 
 
 				/*
 				 * Include the Post-Format-specific template for the content.
@@ -86,8 +86,11 @@ get_header(); ?>
 		endif; ?>
 
 		</main><!-- #main -->
+		
 	</div><!-- #primary -->
+	
 	<?php get_sidebar(); ?>
+	
 </div><!-- .wrap -->
 
 <?php get_footer();
