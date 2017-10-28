@@ -4,18 +4,18 @@
 //  (Please see http://codex.wordpress.org/Child_Themes#How_to_Create_a_Child_Theme)
 //
 
-function tanin_enqueue_styles() {
+function negar_enqueue_styles() {
 
-    wp_enqueue_style( 'tanin-parent-style', get_template_directory_uri() . '/style.css' );
+    wp_enqueue_style( 'negar-parent-style', get_template_directory_uri() . '/style.css' );
 
-    wp_enqueue_style( 'tanin-style',
+    wp_enqueue_style( 'negar-style',
         get_stylesheet_directory_uri() . '/style.css',
         array('parent-style')
     );
     /**
      * Theme Front end main js
      */
-    wp_enqueue_script( "tanin-script" , get_stylesheet_directory_uri() . '/assets/js/script.js' , array( 'jquery', 'carousel' , 'sed-livequery' , 'jquery-ui-accordion' , 'jquery-ui-tabs' ) , "1.0.0" , true );
+    wp_enqueue_script( "negar-script" , get_stylesheet_directory_uri() . '/assets/js/script.js' , array( 'jquery', 'carousel' , 'sed-livequery' , 'jquery-ui-accordion' , 'jquery-ui-tabs' ) , "1.0.0" , true );
 
     //wp_enqueue_script('sed-masonry');
 
@@ -31,26 +31,26 @@ function tanin_enqueue_styles() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'tanin_enqueue_styles' , 0 );
+add_action( 'wp_enqueue_scripts', 'negar_enqueue_styles' , 0 );
 
-add_action( 'after_setup_theme', 'sed_tanin_theme_setup' );
+add_action( 'after_setup_theme', 'sed_negar_theme_setup' );
 
-function sed_tanin_theme_setup() {
+function sed_negar_theme_setup() {
 
-    load_child_theme_textdomain( 'tanin', get_stylesheet_directory() . '/languages' );
+    load_child_theme_textdomain( 'negar', get_stylesheet_directory() . '/languages' );
 
     remove_filter( 'excerpt_more', 'twentyseventeen_excerpt_more' );
 
     /**
      * Short Description (excerpt).
      */
-    add_filter( 'tanin_short_description', 'wptexturize' );
-    add_filter( 'tanin_short_description', 'convert_smilies' );
-    add_filter( 'tanin_short_description', 'convert_chars' );
-    add_filter( 'tanin_short_description', 'wpautop' );
-    add_filter( 'tanin_short_description', 'shortcode_unautop' );
-    add_filter( 'tanin_short_description', 'prepend_attachment' );
-    add_filter( 'tanin_short_description', 'do_shortcode', 11 ); // AFTER wpautop()
+    add_filter( 'negar_short_description', 'wptexturize' );
+    add_filter( 'negar_short_description', 'convert_smilies' );
+    add_filter( 'negar_short_description', 'convert_chars' );
+    add_filter( 'negar_short_description', 'wpautop' );
+    add_filter( 'negar_short_description', 'shortcode_unautop' );
+    add_filter( 'negar_short_description', 'prepend_attachment' );
+    add_filter( 'negar_short_description', 'do_shortcode', 11 ); // AFTER wpautop()
 
     // This theme uses wp_nav_menu() in two locations.
     register_nav_menus( array(
@@ -59,20 +59,20 @@ function sed_tanin_theme_setup() {
 
 }
 
-function tanin_excerpt_more( $link ) {
+function negar_excerpt_more( $link ) {
     if ( is_admin() ) {
         return $link;
     }
 
     return ' &hellip; ';
 }
-add_filter( 'excerpt_more', 'tanin_excerpt_more' );
+add_filter( 'excerpt_more', 'negar_excerpt_more' );
 
-function tanin_excerpt_length( $length ) {
+function negar_excerpt_length( $length ) {
     return 650;
 }
 
-add_filter( 'excerpt_length', 'tanin_excerpt_length', 999 );
+add_filter( 'excerpt_length', 'negar_excerpt_length', 999 );
 
 /**
  * Add Site Editor Modules
@@ -80,46 +80,46 @@ add_filter( 'excerpt_length', 'tanin_excerpt_length', 999 );
  * @param $modules
  * @return mixed
  */
-function sed_tanin_add_modules( $modules ){
+function sed_negar_add_modules( $modules ){
 
     global $sed_pb_modules;
 
     $module_name = "themes/tanin/site-editor/modules/posts/posts.php";
     $modules[$module_name] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/posts/posts.php', true, true);
 
-    $module_name = "themes/tanin/site-editor/modules/terms/terms.php";
-    $modules[$module_name] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/terms/terms.php', true, true);
+    //$module_name = "themes/tanin/site-editor/modules/terms/terms.php";
+    //$modules[$module_name] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/terms/terms.php', true, true);
 
-    //$module_name = "themes/tanin/site-editor/modules/tanin-products/tanin-products.php";
-    //$modules[$module_name] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/tanin-products/tanin-products.php', true, true);
+    $module_name = "themes/tanin/site-editor/modules/negar-products/negar-products.php";
+    $modules[$module_name] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/negar-products/negar-products.php', true, true);
     
     $module_name = "themes/tanin/site-editor/modules/in-btn-back/in-btn-back.php";
     $modules[$module_name ] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/in-btn-back/in-btn-back.php', true, true);
     
     
-    $module_name = "themes/tanin/site-editor/modules/vertical-header/vertical-header.php";
-    $modules[$module_name ] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/vertical-header/vertical-header.php', true, true);
+    //$module_name = "themes/tanin/site-editor/modules/vertical-header/vertical-header.php";
+    //$modules[$module_name ] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/vertical-header/vertical-header.php', true, true);
 
     
-    $module_name = "themes/tanin/site-editor/modules/subscription/subscription.php";
-    $modules[$module_name ] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/subscription/subscription.php', true, true);     
+    //$module_name = "themes/tanin/site-editor/modules/subscription/subscription.php";
+    //$modules[$module_name ] = $sed_pb_modules->get_module_data(get_stylesheet_directory() . '/site-editor/modules/subscription/subscription.php', true, true);
     
     return $modules;
 
 }
 
-add_filter("sed_modules" , "sed_tanin_add_modules" );
+add_filter("sed_modules" , "sed_negar_add_modules" );
 
 
 
-function tanin_register_theme_fields( $fields ){
+function negar_register_theme_fields( $fields ){
 
-    $fields['products_archive_description'] = array(
+    /*$fields['products_archive_description'] = array(
         'type'              => 'textarea',
         'label'             => __('Product Archive Description', 'site-editor'),
         //'description'       => '',
         'transport'         => 'postMessage' ,
-        'setting_id'        => 'tanin_products_archive_description',
+        'setting_id'        => 'negar_products_archive_description',
         'default'           => '',
         "panel"             => "general_settings" ,
     );
@@ -129,7 +129,7 @@ function tanin_register_theme_fields( $fields ){
         'label'             => __('Home Page Product Description', 'site-editor'),
         //'description'       => '',
         'transport'         => 'postMessage' ,
-        'setting_id'        => 'tanin_home_page_products_description',
+        'setting_id'        => 'negar_home_page_products_description',
         'default'           => '',
         "panel"             => "general_settings" ,
     );
@@ -143,7 +143,7 @@ function tanin_register_theme_fields( $fields ){
             'label' => __('English Site Url', 'site-editor'),
             //'description'       => '',
             'transport' => 'postMessage',
-            'setting_id' => 'tanin_english_site_url',
+            'setting_id' => 'negar_english_site_url',
             'default' => 'http://eng.tanin.com',
             "panel" => "general_settings",
         );
@@ -151,23 +151,23 @@ function tanin_register_theme_fields( $fields ){
     }
 
     $fields[ 'intro_logo' ] = array(
-        'setting_id'        => 'tanin_intro_logo',
+        'setting_id'        => 'negar_intro_logo',
         'label'             => __('Intro Logo', 'translation_domain'),
         'type'              => 'image',
         //'priority'          => 10,
         'default'           => '',
         'transport'         => 'postMessage' ,
         'panel'             =>  'general_settings'
-    );
+    );*/
 
     return $fields;
 
 }
 
-//add_filter( "sed_theme_options_fields_filter" , 'tanin_register_theme_fields' , 10000 );
+//add_filter( "sed_theme_options_fields_filter" , 'negar_register_theme_fields' , 10000 );
 
 
-add_action( 'pre_get_posts', 'tanin_per_page_query' );
+add_action( 'pre_get_posts', 'negar_per_page_query' );
 /**
  * Customize category query using pre_get_posts.
  *
@@ -177,7 +177,7 @@ add_action( 'pre_get_posts', 'tanin_per_page_query' );
  * @todo       Change prefix to theme or plugin prefix
  *
  */
-function tanin_per_page_query( $query ) {
+function negar_per_page_query( $query ) {
 
     $is_blog = ( is_home() && is_front_page() ) || ( is_home() && !is_front_page() );
 
@@ -210,30 +210,8 @@ function tanin_per_page_query( $query ) {
 
 }
 
-function tanin_one_click_checkout(){
 
-    if( !is_admin() && isset( $_REQUEST['tanin_quick_checkout'] ) && $_REQUEST['tanin_quick_checkout'] == 1 && isset( $_REQUEST['add_to_cart'] ) ){
-
-        $product_id = (int)$_REQUEST['add_to_cart'];
-
-        WC()->cart->empty_cart();
-
-        WC()->cart->add_to_cart( $product_id );
-
-        $wo_checkout_url = WC()->cart->get_checkout_url();
-
-        wp_safe_redirect( $wo_checkout_url );
-
-        exit();
-
-    }
-
-}
-
-add_action( 'wp_loaded' , 'tanin_one_click_checkout' );
-
-
-function tanin_add_google_font( $google_fonts ){
+function negar_add_google_font( $google_fonts ){
 
     $google_fonts["David Libre"] = "David Libre";
 
@@ -241,23 +219,9 @@ function tanin_add_google_font( $google_fonts ){
 
 }
 
-add_filter( 'sed_google_fonts_filter' , 'tanin_add_google_font' );
+//add_filter( 'sed_google_fonts_filter' , 'negar_add_google_font' );
 
-function tanin_go_to_services(){
-
-    if( is_post_type_archive( 'services-blog' ) ){
-
-        wp_safe_redirect( site_url('/tservices') );
-
-        exit;
-
-    }
-
-}
-
-add_action( "wp" , "tanin_go_to_services" );
-
-function tanin_check_exist_parent_term( $term , $list ){
+function negar_check_exist_parent_term( $term , $list ){
 
     if( !$term->parent ){
 
@@ -271,7 +235,7 @@ function tanin_check_exist_parent_term( $term , $list ){
 
     }
 
-    return tanin_check_exist_parent_term( get_term( $term->parent ) , $list );
+    return negar_check_exist_parent_term( get_term( $term->parent ) , $list );
 
 }
 
@@ -295,6 +259,20 @@ function negar_add_header_group_icon( $atts = null ){
             <div class="negar-header-icon ncart">
                <?php echo do_shortcode( '[sed_woo_cart_icon]' );?>
             </div>
+
+            <div class="negar-header-icon ncart responsive-cart">
+
+                <?php
+                global $woocommerce;
+                $cart_url = $woocommerce->cart->get_cart_url();
+                ?>
+
+                <a class="cart-contents" href="<?php echo esc_attr( esc_url( $cart_url ) );?>" title="View your shopping cart">
+
+                </a>
+
+            </div>
+
         </div>
 
         <div class="col-xs-4">
@@ -362,6 +340,46 @@ function negar_comment($comment, $args, $depth) {
 
     </article><!-- .comment-body -->
     <?php
+}
+
+/**
+ * Get an attachment ID given a URL.
+ *
+ * @param string $url
+ *
+ * @return int Attachment ID on success, 0 on failure
+ */
+function negar_get_attachment_id_by_url( $url ) {
+    $attachment_id = 0;
+    $dir = wp_upload_dir();
+    if ( false !== strpos( $url, $dir['baseurl'] . '/' ) ) { // Is URL in uploads directory?
+        $file = basename( $url );
+        $query_args = array(
+            'post_type'   => 'attachment',
+            'post_status' => 'inherit',
+            'fields'      => 'ids',
+            'meta_query'  => array(
+                array(
+                    'value'   => $file,
+                    'compare' => 'LIKE',
+                    'key'     => '_wp_attachment_metadata',
+                ),
+            )
+        );
+        $query = new WP_Query( $query_args );
+        if ( $query->have_posts() ) {
+            foreach ( $query->posts as $post_id ) {
+                $meta = wp_get_attachment_metadata( $post_id );
+                $original_file       = basename( $meta['file'] );
+                $cropped_image_files = wp_list_pluck( $meta['sizes'], 'file' );
+                if ( $original_file === $file || in_array( $file, $cropped_image_files ) ) {
+                    $attachment_id = $post_id;
+                    break;
+                }
+            }
+        }
+    }
+    return $attachment_id;
 }
 
 /**

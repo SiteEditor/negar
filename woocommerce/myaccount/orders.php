@@ -87,7 +87,7 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 
 				<tr class="woocommerce-orders-table__row order-explain">
 
-					<td colspan="5">
+					<td colspan="5" data-title="<?php echo __("Order Details" , "negar"); ?>">
 
 						<div class="row bs-wizard" style="border-bottom:0;">
 

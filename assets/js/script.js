@@ -92,6 +92,68 @@
 
 
         /**
+         *
+         */
+
+        $(".sed-negar-slider").livequery(function(){
+
+            var $sliderNav = $(this).data('sliderNav'),
+                options = {
+                    //mobileFirst         : true ,
+                    arrows              : false,
+                    slidesToShow        : 1,
+                    slidesToScroll      : 1,
+                    dots                : false,
+                    //centerMode          : false,
+                    rtl                 : $rtl,
+                    //swipe               : true ,
+                    touchMove           : true ,
+                    infinite            : true,
+                    autoplay            : true,
+                    autoplaySpeed       : 4500 ,
+                    easing              : "easeOutQuad",
+                    speed               : 700,
+                    pauseOnHover        : false ,
+                    pauseOnFocus        : false
+                    //prevArrow : '<span class="slide-nav-bt slide-prev custom-btn custom-btn-secondary"><i class="fa fa-angle-left"></i></span>',
+                    //nextArrow : '<span class="slide-nav-bt slide-next custom-btn custom-btn-secondary"><i class="fa fa-angle-right"></i></span>',
+                },
+                $pause = $(this).data('pause');
+
+            if( $sliderNav ){
+                options.asNavFor = $sliderNav;
+            }
+
+            if( $pause && $pause == "no" ) {
+                options.pauseOnFocus = false;
+                options.pauseOnHover = false;
+
+            }
+
+            $(this).slick( options );
+
+        });
+
+
+        $(".negar-next-prev-controler").livequery(function(){
+
+            var $parent = $(this).parents(".negar-sliders-img:first");
+
+            $(this).find(".next").on("click" , function(){
+
+                $parent.find(".sed-negar-slider").slick("slickNext");
+
+            });
+
+            $(this).find(".previous").on("click" , function(){
+
+                $parent.find(".sed-negar-slider").slick("slickPrev");
+
+            });
+
+        });
+
+        /**
          * Terms Accordion
          */
 
@@ -116,7 +178,7 @@
         $(".flex-control-nav.flex-control-thumbs").livequery(function(){
 
             $(this).slick({
-                mobileFirst 		: true ,
+                //mobileFirst 		: true ,
                 arrows				: true,
                 slidesToShow		: 4,
                 slidesToScroll		: 1,
@@ -128,6 +190,25 @@
                 infinite			: false,
                 prevArrow : '<span class="slide-nav-bt slide-prev custom-btn custom-btn-secondary"><i class="fa fa-angle-left"></i></span>',
                 nextArrow : '<span class="slide-nav-bt slide-next custom-btn custom-btn-secondary"><i class="fa fa-angle-right"></i></span>',
+                responsive: [
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    }
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ]
             });
 
         });
@@ -135,7 +216,7 @@
         $(".related.products > ul.products").livequery(function(){
 
             $(this).slick({
-                mobileFirst 		: true ,
+                //mobileFirst 		: true ,
                 arrows				: true,
                 slidesToShow		: 4,
                 slidesToScroll		: 1,
@@ -147,6 +228,32 @@
                 infinite			: false,
                 prevArrow : '<span class="slide-nav-bt slide-prev custom-btn custom-btn-secondary"><i class="fa fa-angle-left"></i></span>',
                 nextArrow : '<span class="slide-nav-bt slide-next custom-btn custom-btn-secondary"><i class="fa fa-angle-right"></i></span>',
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ]
             });
 
         });

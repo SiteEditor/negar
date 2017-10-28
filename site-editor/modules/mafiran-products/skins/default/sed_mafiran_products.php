@@ -25,7 +25,7 @@
             $timber_gallery = get_term_meta( $timber->term_id , 'wpcf-product-category-images' , false );
 
             $wooden_logs_gallery = get_term_meta( $wooden_logs->term_id , 'wpcf-product-category-images' , false );
-
+            
             $products_description = get_theme_mod( 'mafiran_home_page_products_description' , '' );
 
             ?>
