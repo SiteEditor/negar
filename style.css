@@ -2249,6 +2249,10 @@ body.logged-in #comments .comment-form-comment {
 
 /************************/
 
+.woocommerce .slick-slider.products .slick-list {
+    padding: 0 1px;
+}
+
 ul.products li.product .button,
 ul.products li.product .button:hover {
     box-shadow: none;
